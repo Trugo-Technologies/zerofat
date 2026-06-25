@@ -23,7 +23,7 @@
     },
     "Storage": {
       "StorageProvider": "postgresql",
-      "ConnectionString": "Host=localhost;Database=zerofatdb;Username=postgres;Password=;",
+      "ConnectionString": "Host=localhost;Port=5432;Database=zerofatdb;Username=postgres;Password=your_password;",
       "Options": {
         "CommandBatchMaxTimeout": "00:05:00",
         "QueuePollInterval": "00:00:10",
@@ -35,7 +35,7 @@
     },
     "Credentials": {
       "User": "Admin",
-      "Password": ""
+      "Password": "your_hangfire_dashboard_password"
     }
   }
 }

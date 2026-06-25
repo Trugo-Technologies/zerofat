@@ -1,16 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Compile Remove="Seedings\NutriPlan\NutriPlanSettingsSeeder.cs" />
-    <Compile Remove="Seedings\NutriPlan\RecipesSeeder.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Seedings\NutriPlan\nutriPlanSettings.json" />
-    <None Remove="Seedings\NutriPlan\recipes.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ClosedXML" />
   </ItemGroup>
 
@@ -33,6 +23,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Seedings\NutriPlan\mealTypes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seedings\NutriPlan\nutriPlanSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seedings\NutriPlan\recipes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

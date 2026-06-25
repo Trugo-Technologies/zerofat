@@ -36,12 +36,16 @@ internal static class Startup
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/stripe.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/stripe.{environmentName}.json", optional: true, reloadOnChange: true);
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/stripe.{environmentName}.local.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/storage.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/storage.{environmentName}.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/sms.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/sms.{environmentName}.json", optional: true, reloadOnChange: true);
+
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/email.json", optional: false, reloadOnChange: true);
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/email.{environmentName}.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddEnvironmentVariables();
 

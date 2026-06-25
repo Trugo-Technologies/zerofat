@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using ZeroFat.Infrastructure.Persistence.Interceptors;
@@ -15,12 +16,29 @@ public static class Extensions
     public static WebApplicationBuilder ConfigureDatabase(this WebApplicationBuilder builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
+        var environment = builder.Environment;
         builder.Services.AddOptions<DatabaseOptions>()
             .BindConfiguration(nameof(DatabaseOptions))
             .ValidateDataAnnotations()
             .PostConfigure(config =>
             {
                 _logger.Information("current db provider: {DatabaseProvider}", config.Provider);
+            });
+        builder.Services.AddOptions<SeedOptions>()
+            .BindConfiguration(nameof(SeedOptions))
+            .PostConfigure(config =>
+            {
+                if (!config.EnableTestingMode)
+                {
+                    return;
+                }
+
+                _logger.Information("testing mode seeding is enabled");
+
+                if (environment.IsProduction())
+                {
+                    _logger.Warning("SeedOptions:EnableTestingMode is true in Production — test seed data will be applied on startup");
+                }
             });
         builder.Services.AddTransient<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         return builder;

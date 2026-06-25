@@ -4,6 +4,7 @@ using ZeroFat.Users.Application.Users;
 using ZeroFat.Users.Infrastructure.Auth.Jwt;
 using Microsoft.AspNetCore.Mvc;
 using ZeroFat.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZeroFat.Users.Api.Controllers;
 internal sealed class UsersController : BaseController
@@ -21,6 +22,7 @@ internal sealed class UsersController : BaseController
         return await _userModule.ExecuteQueryAsync(request);
     }
 
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult<Result<string>>> CreateAsync([FromForm] CreateUserRequest request)
     {

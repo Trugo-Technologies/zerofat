@@ -58,5 +58,16 @@ public class ClientSubscription : AuditableEntity
     public int RenewalCount { get; set; }
     public DateOnly? NextRenewalDate { get; set; }
     public DateTime? LastStatusUpdate { get; set; }
+
+    // Manage Subscription / admin wizard fields (migration addSubscriptionWizardDraft)
+    public string? PlanVariant { get; set; }
+    public int? CalorieTarget { get; set; }
+    public int? ProteinTargetG { get; set; }
+    public decimal? ManualDiscountAed { get; set; }
+    public string? PromoCode { get; set; }
+    public decimal? VatAmount { get; set; }
+    public decimal? AddOnAmount { get; set; }
+    public List<SubscriptionWizardAddOnItem> AddOnItems { get; set; } = [];
+    public DefaultIdType? CreatedByAdminId { get; set; }
 }
 

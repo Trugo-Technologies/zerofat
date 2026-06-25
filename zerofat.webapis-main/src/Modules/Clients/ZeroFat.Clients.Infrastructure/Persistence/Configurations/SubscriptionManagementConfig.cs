@@ -12,8 +12,29 @@ public class ClientSubscriptionConfig : IEntityTypeConfiguration<ClientSubscript
     public void Configure(EntityTypeBuilder<ClientSubscription> builder)
     {
         builder.ToTable("ClientSubscriptions", SchemaNames.Client);
-        //builder.Property(x => x.StartDate).HasConversion(new DateOnlyConverter(), new DateOnlyComparer());
-        //builder.Property(x => x.EndDate).HasConversion(new DateOnlyConverter(), new DateOnlyComparer());
+        builder.Property(x => x.AddOnItems)
+            .HasColumnType("jsonb")
+            .HasConversion(new JsonValueConverter<List<SubscriptionWizardAddOnItem>>());
+    }
+}
+
+public class SubscriptionWizardDraftConfig : IEntityTypeConfiguration<SubscriptionWizardDraft>
+{
+    public void Configure(EntityTypeBuilder<SubscriptionWizardDraft> builder)
+    {
+        builder.ToTable("SubscriptionWizardDrafts", SchemaNames.Client);
+        builder.Property(x => x.MealTypeSelections)
+            .HasColumnType("jsonb")
+            .HasConversion(new JsonValueConverter<List<WizardMealTypeSelection>>());
+        builder.Property(x => x.AddOnItems)
+            .HasColumnType("jsonb")
+            .HasConversion(new JsonValueConverter<List<SubscriptionWizardAddOnItem>>());
+        builder.Property(x => x.SelectedDeliveryDates)
+            .HasColumnType("jsonb")
+            .HasConversion(new JsonValueConverter<List<DateOnly>>());
+        builder.Property(x => x.SelectedDeliveryDays)
+            .HasColumnType("jsonb")
+            .HasConversion(new JsonValueConverter<List<DayOfWeek>>());
     }
 }
 

@@ -1,0 +1,12 @@
+{
+  "EmailSettings": {
+    "Enabled": false,
+    "FromAddress": "noreply@zerofat.ai",
+    "FromName": "ZeroFat",
+    "SmtpHost": "",
+    "SmtpPort": 587,
+    "SmtpUsername": "",
+    "SmtpPassword": "",
+    "UseSsl": true
+  }
+}

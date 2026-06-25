@@ -41,6 +41,7 @@ public class RenewClientSubscriptionRequestHandler(
     IRepositoryWithEvents<Payment> paymentRepo,
     IRepositoryWithEvents<ClientLoyaltyPoint> clientLoyaltyPointRepo,
     IClientPortalSettingservice clientPortalSettingservice,
+    ISubscriptionPricingService pricingService,
     IStringLocalizer<RenewClientSubscriptionRequestHandler> localizer,
     ILogger<RenewClientSubscriptionRequestHandler> logger,
     IJobService jobService,
@@ -90,33 +91,24 @@ public class RenewClientSubscriptionRequestHandler(
 
         // 4. Calculate Dates, Cost, and Calories
         newSubscription.StartDate = oldSub.EndDate.AddDays(1);
-        newSubscription.AverageCalories = oldSub.AverageCalories;
-        newSubscription.TotalCost = oldSub.SelectedMealTypes.Sum(s => s.QuantityPerDay * s.Price);
-        newSubscription.TotalCost *= newSubscription.SelectedDeliveryDays.Count;
 
-        // Apply package type rules
-        switch (oldSub.SubscriptionType)
+        var pricing = await pricingService.CalculateAsync(new SubscriptionPricingInput
         {
-            case SubscriptionType.OneWeek:
-                newSubscription.EndDate = newSubscription.StartDate.AddDays(6);
-                break;
-            case SubscriptionType.OneMonth:
-                newSubscription.EndDate = newSubscription.StartDate.AddDays(27);
-                newSubscription.TotalCost *= 4;
+            SubscriptionType = oldSub.SubscriptionType,
+            SelectedDeliveryDays = newSubscription.SelectedDeliveryDays,
+            StartDate = newSubscription.StartDate,
+            MealTypeSelections = newSubscription.SelectedMealTypes.Select(s => new SubscriptionMealTypePricingInput
+            {
+                MealTypeId = s.MealTypeId,
+                QuantityPerDay = s.QuantityPerDay,
+                Price = s.Price
+            }).ToList()
+        }, cancellationToken);
 
-                var monthlyDiscount = await clientPortalSettingservice.GetMonthlyPackageSubsciptionDiscount();
-                if (monthlyDiscount > 0)
-                    newSubscription.TotalCost -= newSubscription.TotalCost * monthlyDiscount / 100;
-                break;
-            case SubscriptionType.ThreeMonths:
-                newSubscription.EndDate = newSubscription.StartDate.AddDays((28 * 3) - 1);
-                newSubscription.TotalCost *= 12;
-
-                var threeMonthlyDiscount = await clientPortalSettingservice.GetThreeMonthlyPackageSubsciptionDiscount();
-                if (threeMonthlyDiscount > 0)
-                    newSubscription.TotalCost -= newSubscription.TotalCost * threeMonthlyDiscount / 100;
-                break;
-        }
+        newSubscription.EndDate = pricing.EndDate;
+        newSubscription.TotalCost = pricing.TotalCost;
+        newSubscription.VatAmount = pricing.VatAmount;
+        newSubscription.AverageCalories = oldSub.AverageCalories;
 
         // 5. Process Immediate Payment with Stripe
         var description = $"Renewal for {oldSub.SubscriptionType} Subscription";

@@ -1,0 +1,5 @@
+{
+  "StripeSettings": {
+    "SecretKey": "sk_test_PASTE_FROM_https://dashboard.stripe.com/test/apikeys"
+  }
+}

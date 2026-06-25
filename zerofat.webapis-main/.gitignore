@@ -36,6 +36,7 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-# Local environment secrets
+# Local secrets (Stripe test keys, etc.)
 .env
-.env.local
+**/.env
+**/Configurations/*.local.json

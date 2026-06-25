@@ -8,7 +8,9 @@ using ZeroFat.ClientPortal.Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ZeroFat.ClientPortal.Application;
+using ZeroFat.ClientPortal.Application.Contracts;
 using ZeroFat.ClientPortal.Domain;
+using ZeroFat.ClientPortal.Infrastructure.Services;
 
 namespace ZeroFat.ClientPortal.Infrastructure;
 
@@ -23,6 +25,8 @@ public static class InfrastructureModule
         services.AddApplicationModule();
         services.AddMediationModule();
         services.AddPersistenceModule(configuration);
+        services.AddTransient<ISubscriptionPricingService, SubscriptionPricingService>();
+        services.AddTransient<IDeliveryCalendarService, DeliveryCalendarService>();
 
         return services;
     }

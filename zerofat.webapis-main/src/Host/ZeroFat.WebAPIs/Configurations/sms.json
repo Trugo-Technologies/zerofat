@@ -12,10 +12,8 @@
       "SendSmsEndpoint": "https://smartmessaging.etisalat.ae:5676/campaigns/submissions/sms/nb",
       "Username": "",
       "Password": "",
-
       "TransactionSenderId": "ZEROFAT APP",
       "TransactionCategoryId": "4.5",
-
       "PromotionalSenderId": "AD-ZEROFAT",
       "PromotionalCategoryId": "4.6"
     }

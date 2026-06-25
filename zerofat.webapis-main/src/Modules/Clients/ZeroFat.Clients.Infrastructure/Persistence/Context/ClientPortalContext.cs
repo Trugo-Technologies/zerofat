@@ -25,6 +25,7 @@ public class ClientPortalContext : IPDbContext
     #endregion
 
     public DbSet<ClientSubscription> ClientSubscriptions => Set<ClientSubscription>();
+    public DbSet<SubscriptionWizardDraft> SubscriptionWizardDrafts => Set<SubscriptionWizardDraft>();
     public DbSet<ClientOrder> ClientOrders => Set<ClientOrder>();
     public DbSet<Payment> Payments => Set<Payment>();
 

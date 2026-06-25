@@ -1,0 +1,7 @@
+{
+  "StripeSettings": {
+    "Currency": "AED",
+    "SuccessUrlDomain": "https://localhost:7000/api/clientPortal-module",
+    "CheckoutCompletedSecretKey": "whsec_replace_with_stripe_cli_listen_secret"
+  }
+}

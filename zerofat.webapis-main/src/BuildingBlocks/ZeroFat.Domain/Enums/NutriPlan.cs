@@ -135,7 +135,10 @@ public enum CuisineType
 public enum SubscriptionType
 {
     OneWeek = 7,
+    TwoWeeks = 14,   // Manage Subscription wizard
+    ThreeWeeks = 21, // Manage Subscription wizard
     OneMonth = 30,
+    TwoMonths = 60,  // Manage Subscription wizard
     ThreeMonths = 90
 }
 

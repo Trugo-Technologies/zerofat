@@ -7,6 +7,9 @@ using ZeroFat.NutriPlan.Api;
 using ZeroFat.Infrastructure.Services;
 using ZeroFat.ClientPortal.Api;
 using ZeroFat.Infrastructure.BackgroundProcessing.Contracts;
+using ZeroFat.Infrastructure.Persistence.Configurations;
+using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace ZeroFat.WebAPIs;
 
@@ -49,12 +52,25 @@ public static class Extensions
 
         using var scope = app.Services.CreateScope();
         var scheduler = scope.ServiceProvider.GetRequiredService<IZerofatJobScheduler>();
+        var seedOptions = scope.ServiceProvider.GetRequiredService<IOptions<SeedOptions>>().Value;
 
         var initializers = scope.ServiceProvider.GetServices<IDbInitializer>();
         foreach (var initializer in initializers)
         {
             initializer.MigrateAsync(CancellationToken.None).Wait();
-            // initializer.SeedAsync(CancellationToken.None).Wait();
+        }
+
+        if (seedOptions.EnableTestingMode)
+        {
+            Log.Information("Testing mode seeding enabled — running seed for all modules");
+            foreach (var initializer in initializers)
+            {
+                initializer.SeedAsync(CancellationToken.None).Wait();
+            }
+        }
+        else
+        {
+            Log.Information("Testing mode seeding disabled — skipping seed");
         }
 
 

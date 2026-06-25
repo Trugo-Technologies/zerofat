@@ -779,8 +779,18 @@ namespace Migrators.PostgreSQL.Migrations.ClientPortal
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<decimal?>("AddOnAmount")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("AddOnItems")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
                     b.Property<decimal>("AverageCalories")
                         .HasColumnType("numeric");
+
+                    b.Property<int?>("CalorieTarget")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("CancelAt")
                         .HasColumnType("timestamp with time zone");
@@ -792,6 +802,9 @@ namespace Migrators.PostgreSQL.Migrations.ClientPortal
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CreatedByAdminId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("CreatedByName")
@@ -830,6 +843,9 @@ namespace Migrators.PostgreSQL.Migrations.ClientPortal
                     b.Property<DateTime?>("LastSyncDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<decimal?>("ManualDiscountAed")
+                        .HasColumnType("numeric");
+
                     b.Property<Guid>("MealPlanId")
                         .HasColumnType("uuid");
 
@@ -848,7 +864,16 @@ namespace Migrators.PostgreSQL.Migrations.ClientPortal
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("integer");
 
+                    b.Property<string>("PlanVariant")
+                        .HasColumnType("text");
+
                     b.Property<int>("PreferredDeliveryTime")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PromoCode")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ProteinTargetG")
                         .HasColumnType("integer");
 
                     b.Property<int>("RenewalCount")
@@ -871,6 +896,9 @@ namespace Migrators.PostgreSQL.Migrations.ClientPortal
                         .HasColumnType("integer");
 
                     b.Property<decimal>("TotalCost")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("VatAmount")
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");
@@ -1190,6 +1218,126 @@ namespace Migrators.PostgreSQL.Migrations.ClientPortal
                     b.HasIndex("ClientSubscriptionId");
 
                     b.ToTable("Payment", "Client");
+                });
+
+            modelBuilder.Entity("ZeroFat.ClientPortal.Domain.SubscriptionManagement.SubscriptionWizardDraft", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AddOnItems")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<int?>("CalorieTarget")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ClientLocationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CreatedByAdminId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("CurrentStep")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CustomerEmail")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DeletedByName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("FinalizedClientSubscriptionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("LastModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LastModifiedByName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("ManualDiscountAed")
+                        .HasColumnType("numeric");
+
+                    b.Property<Guid?>("MealPlanId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("MealTypeSelections")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("OptionalMessage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PlanVariant")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("PreferredDeliveryTime")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PromoCode")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ProteinTargetG")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("RenewalStrategy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("ScheduledStartDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("SelectedDeliveryDates")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("SelectedDeliveryDays")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<bool>("SkipSaturdays")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("SkipSundays")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SubscriptionType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WizardMode")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubscriptionWizardDrafts", "Client");
                 });
 
             modelBuilder.Entity("ZeroFat.NutriPlan.Domain.MealPlanning.Extra", b =>

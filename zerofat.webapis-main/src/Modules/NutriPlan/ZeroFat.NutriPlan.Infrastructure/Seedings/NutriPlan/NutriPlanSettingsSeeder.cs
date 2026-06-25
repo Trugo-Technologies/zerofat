@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ZeroFat.Domain.Core;
+using ZeroFat.Domain.Enums;
 using ZeroFat.Infrastructure.Core.Persistence.Context;
-using ZeroFat.Infrastructure.Core.Services;
 using ZeroFat.NutriPlan.Infrastructure.Services;
 
 namespace ZeroFat.NutriPlan.Infrastructure.Seedings.NutriPlan;
@@ -27,25 +22,36 @@ public class NutriPlanSettingsSeeder : INutriPlanSeeder
     public async Task InitializeAsync(CancellationToken cancellationToken)
     {
         string? path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        if (!await _db.Settings.AnyAsync(cancellationToken))
+        try
         {
-            try
-            {
-                _logger.LogInformation("Started to Seed NutriPlan Settings.");
-                string counrtyData = await File.ReadAllTextAsync(path + "/Seedings/NutriPlan/nutriPlanSettings.json", cancellationToken);
-                var nutriPlanSettings = JsonSerializer.Deserialize<List<Setting>>(counrtyData);
+            _logger.LogInformation("Started to Seed NutriPlan Settings.");
+            string settingsData = await File.ReadAllTextAsync(path + "/Seedings/NutriPlan/nutriPlanSettings.json", cancellationToken);
+            var nutriPlanSettings = JsonSerializer.Deserialize<List<Setting>>(settingsData);
 
-                if (nutriPlanSettings != null)
+            if (nutriPlanSettings != null)
+            {
+                var existingPropertyNames = (await _db.Settings
+                    .Where(s => s.ApplicationModule == ApplicationModule.NutriPlan)
+                    .Select(s => s.PropertyName)
+                    .ToListAsync(cancellationToken))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                var settingsToAdd = nutriPlanSettings
+                    .Where(s => !existingPropertyNames.Contains(s.PropertyName))
+                    .ToList();
+
+                if (settingsToAdd.Count != 0)
                 {
-                    await _db.Settings.AddRangeAsync(nutriPlanSettings, cancellationToken);
+                    await _db.Settings.AddRangeAsync(settingsToAdd, cancellationToken);
                     await _db.SaveChangesAsync(cancellationToken);
                 }
-                _logger.LogInformation("Seed NutriPlan Settings Done.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Faild Seeding NutriPlan Settings.");
-            }
+
+            _logger.LogInformation("Seed NutriPlan Settings Done.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Faild Seeding NutriPlan Settings.");
         }
     }
 }

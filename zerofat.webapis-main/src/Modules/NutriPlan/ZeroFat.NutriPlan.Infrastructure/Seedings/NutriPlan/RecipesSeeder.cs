@@ -113,7 +113,7 @@ public class RecipesSeeder : INutriPlanSeeder
 
                 await _db.SaveChangesAsync(cancellationToken);
                 var mealsdb = await _db.Meals.Include(x => x.Recipe).ThenInclude(x => x.RecipeMealTypes).ToListAsync(cancellationToken);
-                var startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1,0,0,0, DateTimeKind.Utc);
+                var startDate = new DateOnly(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
                 for (int i = 0; i < 14; i++)
                 {
                     var menu = new Menu()
@@ -125,7 +125,7 @@ public class RecipesSeeder : INutriPlanSeeder
                         NameAr = "Menu Test"
                     };
 
-                    for (DateTime date = menu.StartDate; date <= menu.EndDate; date = date.AddDays(1))
+                    for (DateOnly date = menu.StartDate; date <= menu.EndDate; date = date.AddDays(1))
                     {
                         foreach (var mealPlan in mealPlans)
                         {

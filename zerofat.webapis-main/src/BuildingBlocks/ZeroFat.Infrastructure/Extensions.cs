@@ -16,6 +16,8 @@ using ZeroFat.Infrastructure.Persistence;
 using ZeroFat.Infrastructure.SMS;
 using ZeroFat.Infrastructure.Storages;
 using ZeroFat.Infrastructure.Stripe;
+using ZeroFat.Infrastructure.Email;
+using ZeroFat.Application.Common.Interfaces;
 
 
 namespace ZeroFat.Infrastructure;
@@ -49,6 +51,10 @@ public static class Extensions
 
         var storage = builder.Configuration.GetSection("Storage").Get<StorageOptions>();
         builder.Services.AddStorageManager(storage);
+
+        builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection(EmailSettings.SectionName));
+        builder.Services.AddTransient<IEmailNotificationService, SmtpEmailNotificationService>();
+        builder.Services.AddTransient<ISendSubscriptionPaymentLinkEmailJob, SmtpEmailNotificationService>();
 
     }
 

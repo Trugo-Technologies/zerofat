@@ -105,6 +105,7 @@ public class CreateClientSubscriptionRequestHandler(
     IStripeService stripeService,
     IRepository<MealPlan> mealPlanRepo,
     IClientPortalSettingservice clientPortalSettingservice,
+    ISubscriptionPricingService pricingService,
     IStringLocalizer<CreateClientSubscriptionRequestHandler> localizer
     ) : IRequestHandler<CreateClientSubscriptionRequest, Result<ClientSubscriptionSimplifyDto>>
 {
@@ -143,6 +144,8 @@ public class CreateClientSubscriptionRequestHandler(
             ClientLocationId = request.ClientLocationId,
         };
 
+        var mealTypePricingInputs = new List<SubscriptionMealTypePricingInput>();
+
         foreach (var mealTypeSelection in request.MealTypeSelections.Where(x => x.QuantityPerDay > 0))
         {
             var mealPlanMealType = await _mealPlanMealTypeRepo.FirstOrDefaultAsync(new ExpressionSpecificationProjecting<MealPlanMealType, MealPlanMealTypeDto>(x => x.MealPlanId == request.MealPlanId && x.MealTypeId == mealTypeSelection.MealTypeId), cancellationToken);
@@ -151,49 +154,44 @@ public class CreateClientSubscriptionRequestHandler(
                 throw new BadRequestException(_localizer["error in subscription please contact our admin through chat."]);
             }
 
+            var price = mealPlanMealType.Price.GetValueOrDefault();
+            var averageCalories = mealPlanMealType.AverageCalories.GetValueOrDefault();
+
             clientSubscription.SelectedMealTypes.Add(new MealTypeSelection()
             {
                 QuantityPerDay = mealTypeSelection.QuantityPerDay,
                 MealTypeId = mealTypeSelection.MealTypeId,
-                Price = mealPlanMealType.Price.GetValueOrDefault(),
+                Price = price,
                 MealTypeNameAr = mealPlanMealType.MealType?.NameAr,
                 MealTypeNameEn = mealPlanMealType.MealType?.NameEn,
             });
 
-            clientSubscription.TotalCost += mealTypeSelection.QuantityPerDay * mealPlanMealType.Price.GetValueOrDefault();
-            clientSubscription.AverageCalories += mealTypeSelection.QuantityPerDay * mealPlanMealType.AverageCalories.GetValueOrDefault();
+            mealTypePricingInputs.Add(new SubscriptionMealTypePricingInput
+            {
+                MealTypeId = mealTypeSelection.MealTypeId,
+                QuantityPerDay = mealTypeSelection.QuantityPerDay,
+                Price = price,
+                AverageCalories = averageCalories,
+                MealTypeNameEn = mealPlanMealType.MealType?.NameEn,
+                MealTypeNameAr = mealPlanMealType.MealType?.NameAr
+            });
         }
 
-        clientSubscription.TotalCost *= request.SelectedDeliveryDays.Count;
-
-        switch (request.SubscriptionType)
+        // Pricing via shared ISubscriptionPricingService (same logic as admin wizard preview/finalize)
+        var pricing = await pricingService.CalculateAsync(new SubscriptionPricingInput
         {
-            case SubscriptionType.OneWeek:
-                clientSubscription.EndDate = request.StartDate.AddDays(6);
-                break;
-            case SubscriptionType.OneMonth:
-                clientSubscription.EndDate = request.StartDate.AddDays(27);
-                clientSubscription.TotalCost *= 4;
+            SubscriptionType = request.SubscriptionType,
+            SelectedDeliveryDays = request.SelectedDeliveryDays,
+            StartDate = request.StartDate,
+            PromoCode = request.CouponCode,
+            MealTypeSelections = mealTypePricingInputs
+        }, cancellationToken);
 
-                var monthlyDiscount = await clientPortalSettingservice.GetMonthlyPackageSubsciptionDiscount();
-                if (monthlyDiscount > 0)
-                {
-                    clientSubscription.TotalCost -= clientSubscription.TotalCost * monthlyDiscount / 100;
-                }
-                break;
-            case SubscriptionType.ThreeMonths:
-                clientSubscription.EndDate = request.StartDate.AddDays(28 * 3).AddDays(-1);
-                clientSubscription.TotalCost *= 12;
-
-                var threeMonthlyDiscount = await clientPortalSettingservice.GetThreeMonthlyPackageSubsciptionDiscount();
-                if (threeMonthlyDiscount > 0)
-                {
-                    clientSubscription.TotalCost -= clientSubscription.TotalCost * threeMonthlyDiscount / 100;
-                }
-                break;
-            default:
-                break;
-        }
+        clientSubscription.EndDate = pricing.EndDate;
+        clientSubscription.TotalCost = pricing.TotalCost;
+        clientSubscription.AverageCalories = pricing.AverageCalories;
+        clientSubscription.VatAmount = pricing.VatAmount;
+        clientSubscription.PromoCode = request.CouponCode;
 
         var mealSelections = clientSubscription.SelectedMealTypes
             .Select(x => new

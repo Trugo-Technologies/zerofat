@@ -1,7 +1,7 @@
 {
   "DatabaseOptions": {
     "Provider": "postgresql",
-    "ConnectionString": "Host=localhost;Database=zerofatdb;Username=postgres;Password=;"
+    "ConnectionString": "Host=localhost;Port=5432;Database=zerofatdb;Username=postgres;Password=your_password;"
   },
   "Modules": {
     "Identity": {
