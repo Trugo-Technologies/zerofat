@@ -33,10 +33,13 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
-# Visual Studio 2015
+# Visual Studio
 .vs/
 
 # Local secrets (Stripe test keys, etc.)
 .env
 **/.env
 **/Configurations/*.local.json
+
+# Publish output
+publish/
