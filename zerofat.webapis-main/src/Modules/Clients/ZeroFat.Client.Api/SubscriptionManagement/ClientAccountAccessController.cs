@@ -12,6 +12,7 @@ namespace ZeroFat.ClientPortal.Api.SubscriptionManagement;
 /// Auth: Bearer JWT — Admin role required.
 ///
 ///   GET {clientId}                      → full profile + subscription card + health metrics
+///   PUT {clientId}                      → edit client profile + delivery addresses (admin)
 ///   GET {clientId}/subscription-summary → active plan, dates, remainingDays, totalDeliveredMeals
 /// </summary>
 internal sealed class ClientAccountAccessController(IClientPortalModule clientPortalModule) : BaseController
@@ -20,6 +21,14 @@ internal sealed class ClientAccountAccessController(IClientPortalModule clientPo
     [HttpGet("{clientId:guid}")]
     public Task<Result<ClientAccountAccessDto>> GetAsync(DefaultIdType clientId)
         => clientPortalModule.ExecuteQueryAsync(new GetClientAccountAccessRequest(clientId));
+
+    /// <summary>Update client personal info and delivery addresses from the account-access edit modal.</summary>
+    [HttpPut("{clientId:guid}")]
+    public Task<Result<ClientAccountAccessDto>> UpdateAsync(DefaultIdType clientId, UpdateClientAccountAccessRequest request)
+    {
+        request.ClientId = clientId;
+        return clientPortalModule.ExecuteCommandAsync(request);
+    }
 
     /// <summary>Subscription summary only — remaining days, delivered meal count, plan name.</summary>
     [HttpGet("{clientId:guid}/subscription-summary")]

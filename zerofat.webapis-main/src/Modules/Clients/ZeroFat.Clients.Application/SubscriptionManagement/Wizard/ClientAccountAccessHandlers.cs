@@ -4,6 +4,7 @@ using ZeroFat.Application.Common.Exceptions;
 using ZeroFat.Application.Common.Interfaces;
 using ZeroFat.Application.Common.Persistence;
 using ZeroFat.Application.Common.Specification;
+using ZeroFat.Application.Common.Validation;
 using ZeroFat.ClientPortal.Application.ClientManagement;
 using ZeroFat.ClientPortal.Application.ClientManagement.Clients;
 using ZeroFat.ClientPortal.Application.SubscriptionManagement.ClientSubscriptions;
@@ -22,6 +23,7 @@ public class GetClientAccountAccessRequest(DefaultIdType clientId) : IQuery<Resu
 public class GetClientAccountAccessRequestHandler(
     ICurrentUser currentUser,
     IReadRepository<Client> clientRepo,
+    IReadRepository<ClientLocation> locationRepo,
     IReadRepository<ClientSubscription> subscriptionRepo,
     IReadRepository<MealPlan> mealPlanRepo,
     IReadRepository<DailyMealSelection> dailyMealSelectionRepo,
@@ -34,6 +36,25 @@ public class GetClientAccountAccessRequestHandler(
         var client = await clientRepo.FirstOrDefaultAsync(new ClientByIdSpec<ClientDetailsDto>(request.ClientId), cancellationToken)
             ?? throw new NotFoundException(localizer["Client not found"]);
 
+        var dto = await BuildDtoAsync(
+            client,
+            locationRepo,
+            subscriptionRepo,
+            mealPlanRepo,
+            dailyMealSelectionRepo,
+            cancellationToken);
+
+        return await Result<ClientAccountAccessDto>.SuccessAsync(dto);
+    }
+
+    internal static async Task<ClientAccountAccessDto> BuildDtoAsync(
+        ClientDetailsDto client,
+        IReadRepository<ClientLocation> locationRepo,
+        IReadRepository<ClientSubscription> subscriptionRepo,
+        IReadRepository<MealPlan> mealPlanRepo,
+        IReadRepository<DailyMealSelection> dailyMealSelectionRepo,
+        CancellationToken cancellationToken)
+    {
         var dto = new ClientAccountAccessDto
         {
             ClientId = client.Id,
@@ -53,7 +74,8 @@ public class GetClientAccountAccessRequestHandler(
             DietitianGoal = client.DietitianGoal,
             TimeToReachGoalInDays = client.TimeToReachGoalInDays,
             NeededCaloriesToReachGoal = client.NeededCaloriesToReachGoal,
-            Allergens = client.ClientAllergicIds.Select(_ => _.ToString()).ToList()
+            Allergens = client.ClientAllergicIds.Select(_ => _.ToString()).ToList(),
+            DeliveryAddresses = await LoadDeliveryAddressesAsync(locationRepo, client.Id, cancellationToken)
         };
 
         if (client.ClientSubscriptionId.HasValue)
@@ -67,7 +89,30 @@ public class GetClientAccountAccessRequestHandler(
                 cancellationToken);
         }
 
-        return await Result<ClientAccountAccessDto>.SuccessAsync(dto);
+        return dto;
+    }
+
+    internal static async Task<List<ClientAccountAccessAddressDto>> LoadDeliveryAddressesAsync(
+        IReadRepository<ClientLocation> locationRepo,
+        DefaultIdType clientId,
+        CancellationToken cancellationToken)
+    {
+        var locations = await locationRepo.ListAsync(
+            new ExpressionSpecification<ClientLocation>(x => x.ClientId == clientId),
+            cancellationToken);
+
+        return locations
+            .OrderBy(x => x.CreatedOn)
+            .Select(x => new ClientAccountAccessAddressDto
+            {
+                Id = x.Id,
+                Type = x.Type,
+                Area = x.Area,
+                Building = x.Building,
+                Flat = x.Office,
+                Street = x.Street
+            })
+            .ToList();
     }
 
     internal static async Task<ClientSubscriptionSummaryDto> BuildSummaryAsync(
@@ -152,5 +197,142 @@ public class GetClientSubscriptionSummaryRequestHandler(
             cancellationToken);
 
         return await Result<ClientSubscriptionSummaryDto>.SuccessAsync(summary);
+    }
+}
+
+public class UpdateClientAccountAccessRequest : ICommand<Result<ClientAccountAccessDto>>
+{
+    public DefaultIdType ClientId { get; set; }
+    public string? FullName { get; set; }
+    public string? Email { get; set; }
+    public string? Mobile { get; set; }
+    public Gender? Gender { get; set; }
+    public DateTime? BirthDate { get; set; }
+    public List<ClientAccountAccessAddressDto> DeliveryAddresses { get; set; } = [];
+}
+
+public class UpdateClientAccountAccessRequestValidator : CustomValidator<UpdateClientAccountAccessRequest>
+{
+    public UpdateClientAccountAccessRequestValidator(IStringLocalizer<UpdateClientAccountAccessRequestValidator> localizer)
+    {
+        RuleFor(x => x.ClientId).NotEmpty();
+
+        RuleFor(x => x.FullName)
+            .NotEmpty()
+            .WithMessage(localizer["Full name is required."]);
+
+        RuleFor(x => x.Email)
+            .NotEmpty()
+            .EmailAddress()
+            .WithMessage(localizer["A valid email is required."]);
+
+        RuleFor(x => x.Mobile)
+            .NotEmpty()
+            .WithMessage(localizer["Phone number is required."]);
+
+        RuleFor(x => x.Gender)
+            .IsInEnum()
+            .When(x => x.Gender.HasValue)
+            .WithMessage(localizer["Gender must be a valid value."]);
+
+        RuleForEach(x => x.DeliveryAddresses).ChildRules(address =>
+        {
+            address.RuleFor(a => a.Type)
+                .NotEmpty()
+                .WithMessage(localizer["Location type is required."]);
+        });
+    }
+}
+
+public class UpdateClientAccountAccessRequestHandler(
+    ICurrentUser currentUser,
+    IRepository<Client> clientRepo,
+    IReadRepository<Client> clientReadRepo,
+    IRepository<ClientLocation> locationRepo,
+    IReadRepository<ClientLocation> locationReadRepo,
+    IReadRepository<ClientSubscription> subscriptionRepo,
+    IReadRepository<MealPlan> mealPlanRepo,
+    IReadRepository<DailyMealSelection> dailyMealSelectionRepo,
+    IStripeService stripeService,
+    IStringLocalizer<UpdateClientAccountAccessRequestHandler> localizer) : ICommandHandler<UpdateClientAccountAccessRequest, Result<ClientAccountAccessDto>>
+{
+    public async Task<Result<ClientAccountAccessDto>> Handle(UpdateClientAccountAccessRequest request, CancellationToken cancellationToken)
+    {
+        SubscriptionWizardAdminHelper.EnsureAdmin(currentUser, localizer);
+
+        var client = await clientRepo.GetByIdAsync(request.ClientId, cancellationToken)
+            ?? throw new NotFoundException(localizer["Client not found"]);
+
+        client.FullName = request.FullName;
+        client.Email = request.Email;
+        client.Mobile = request.Mobile;
+        client.Gender = request.Gender;
+        client.BirthDate = request.BirthDate;
+
+        await UpsertDeliveryAddressesAsync(request.ClientId, request.DeliveryAddresses, cancellationToken);
+
+        if (client.StripeId.HasValue())
+        {
+            await stripeService.UpdateCustomerOnStripe(
+                client.StripeId!,
+                client.Email,
+                client.FullName,
+                client.Mobile,
+                client.Id.ToString());
+        }
+
+        await clientRepo.UpdateAsync(client, cancellationToken);
+
+        var updatedClient = await clientReadRepo.FirstOrDefaultAsync(
+            new ClientByIdSpec<ClientDetailsDto>(request.ClientId),
+            cancellationToken)
+            ?? throw new NotFoundException(localizer["Client not found"]);
+
+        var dto = await GetClientAccountAccessRequestHandler.BuildDtoAsync(
+            updatedClient,
+            locationReadRepo,
+            subscriptionRepo,
+            mealPlanRepo,
+            dailyMealSelectionRepo,
+            cancellationToken);
+
+        return await Result<ClientAccountAccessDto>.SuccessAsync(dto);
+    }
+
+    private async Task UpsertDeliveryAddressesAsync(
+        DefaultIdType clientId,
+        List<ClientAccountAccessAddressDto> addresses,
+        CancellationToken cancellationToken)
+    {
+        foreach (var address in addresses)
+        {
+            if (address.Id.HasValue)
+            {
+                var location = await locationRepo.GetByIdAsync(address.Id.Value, cancellationToken)
+                    ?? throw new NotFoundException(localizer["Location not found"]);
+
+                if (location.ClientId != clientId)
+                {
+                    throw new ForbiddenException(localizer["Location does not belong to this client."]);
+                }
+
+                ApplyAddressFields(location, address);
+                await locationRepo.UpdateAsync(location, cancellationToken);
+                continue;
+            }
+
+            var newLocation = new ClientLocation { ClientId = clientId };
+            ApplyAddressFields(newLocation, address);
+            await locationRepo.AddAsync(newLocation, cancellationToken);
+        }
+    }
+
+    private static void ApplyAddressFields(ClientLocation location, ClientAccountAccessAddressDto address)
+    {
+        location.Type = address.Type;
+        location.Area = address.Area;
+        location.Building = address.Building;
+        location.Office = address.Flat;
+        location.Street = address.Street;
     }
 }

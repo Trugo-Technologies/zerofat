@@ -1,0 +1,10 @@
+{
+  "HealthChecksUI": {
+    "HealthChecks": [
+      {
+        "Name": "ZEROFAT - Health Checks",
+        "Uri": "http://localhost:18891/health-api"
+      }
+    ]
+  }
+}

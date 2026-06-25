@@ -94,7 +94,18 @@ public class ClientAccountAccessDto : IDto
     public int TimeToReachGoalInDays { get; set; }
     public double NeededCaloriesToReachGoal { get; set; }
     public List<string> Allergens { get; set; } = [];
+    public List<ClientAccountAccessAddressDto> DeliveryAddresses { get; set; } = [];
     public ClientSubscriptionSummaryDto? Subscription { get; set; }
+}
+
+public class ClientAccountAccessAddressDto : IDto
+{
+    public DefaultIdType? Id { get; set; }
+    public AddressType? Type { get; set; }
+    public string? Area { get; set; }
+    public string? Building { get; set; }
+    public string? Flat { get; set; }
+    public string? Street { get; set; }
 }
 
 public class ClientSubscriptionSummaryDto : IDto

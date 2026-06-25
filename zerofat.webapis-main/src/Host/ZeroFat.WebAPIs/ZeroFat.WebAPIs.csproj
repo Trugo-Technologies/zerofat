@@ -24,6 +24,15 @@
     <Content Update="Configurations\stripe.Development.local.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="Configurations\modules.Development.local.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Configurations\hangfire.Development.local.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Configurations\healthcheck.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Configurations\sms.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
