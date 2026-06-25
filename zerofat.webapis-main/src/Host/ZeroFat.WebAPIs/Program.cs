@@ -1,3 +1,4 @@
+using DotNetEnv;
 using Hangfire;
 using Serilog;
 using ZeroFat.ClientPortal.Application.Contracts;
@@ -6,6 +7,8 @@ using ZeroFat.Infrastructure.Logging.Serilog;
 using ZeroFat.NutriPlan.Application.Contracts;
 using ZeroFat.WebAPIs;
 using ZeroFat.WebAPIs.Configurations;
+
+Env.TraversePath().Load();
 
 StaticLogger.EnsureInitialized();
 Log.Information("server booting up..");
