@@ -1,0 +1,82 @@
+[
+  {
+    "TitleEn": "Live Dashboard Hub !",
+    "TitleAr": null,
+    "Index": 1,
+    "DescriptionEn": "Your central hub for real-time tracking and mangement of food intake, exercise, and health goals, seamless integrating with your daily routines.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-08.jpg"
+  },
+  {
+    "TitleEn": "Meal Plans & Delivery !",
+    "TitleAr": null,
+    "Index": 2,
+    "DescriptionEn": "Select meal plan aligned with your goals-like weight loss or customized and receive daily deliveries to your doorstep, manged effortlessly through your dashboard.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-01.jpg"
+  },
+  {
+    "TitleEn": "Workout & Fitness Plans !",
+    "TitleAr": null,
+    "Index": 3,
+    "DescriptionEn": "Free access diverse workout routines like body building, crossfit, conditioning and many many more led by expert trainers. Workout as you go.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-02.jpg"
+  },
+  {
+    "TitleEn": "Global Personal Training Hub !",
+    "TitleAr": null,
+    "Index": 4,
+    "DescriptionEn": "Connect with top trainers worldwide and access personalized fitness services tailored to your needs, all in one convenient platform.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-06.jpg"
+  },
+  {
+    "TitleEn": "Certified Nuration Connection !",
+    "TitleAr": null,
+    "Index": 5,
+    "DescriptionEn": "Connect with certified nutritionists globally for guidance and advice tailored to your dietary needs and health goals.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-04.jpg"
+  },
+  {
+    "TitleEn": "Healthy Restuarant Orders !",
+    "TitleAr": null,
+    "Index": 6,
+    "DescriptionEn": "Discover and order from approved restaurants nutrition details on your dashboard when you purchase for pick up or dine-in through our platform.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-03.jpg"
+  },
+  {
+    "TitleEn": "Online Suppliments Shops !",
+    "TitleAr": null,
+    "Index": 7,
+    "DescriptionEn": "Shop supplements, vitamins, proteins, and more in our online store. Easily manage your nutritional needs directly from our platform.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-07.jpg"
+  },
+  {
+    "TitleEn": "Our Smart Scale !",
+    "TitleAr": null,
+    "Index": 7,
+    "DescriptionEn": "Track BMI and body metrics seamlessly with our Bluetooth smart scale, syncing data to your dashboard for daily progress monitoring.",
+    "DescriptionAr": null,
+    "WelcomeMsgEn": "Welcome to ZEROFAT",
+    "WelcomeMsgAr": null,
+    "ImageUrl": "Files/Images/Advertisements/v-05.jpg"
+  }
+]

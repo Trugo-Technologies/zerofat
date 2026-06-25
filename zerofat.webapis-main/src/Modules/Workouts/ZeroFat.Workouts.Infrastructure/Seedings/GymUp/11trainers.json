@@ -1,0 +1,74 @@
+[
+  {
+    "NameAr": "أحمد يوسف",
+    "NameEn": "Ahmed Youssef",
+    "BriefAr": "مدرب لياقة بدنية ذو خبرة.",
+    "BriefEn": "Experienced fitness trainer.",
+    "DescriptionAr": "أحمد يوسف هو مدرب لياقة بدنية معتمد، يمتلك خبرة واسعة في تصميم برامج التدريب الشخصية والمساعدة على تحقيق الأهداف البدنية.",
+    "DescriptionEn": "Ahmed Youssef is a certified fitness trainer with extensive experience in designing personalized training programs and helping achieve fitness goals.",
+    "Type": "Trainer",
+    "SpecialisesIn": [
+      "Personal Training",
+      "Strength Training"
+    ],
+    "InstagramUrl": "https://instagram.com/ahmed_youssef",
+    "FacebookUrl": "https://facebook.com/ahmed.youssef",
+    "PinterestUrl": "https://pinterest.com/ahmed_youssef",
+    "YoutubeUrl": "https://youtube.com/ahmedyousseffitness",
+    "WebsiteUrl": "https://ahmedyousseffitness.com"
+  },
+  {
+    "NameAr": "نور محمد",
+    "NameEn": "Noor Mohammed",
+    "BriefAr": "أخصائية تغذية ومدربة لياقة.",
+    "BriefEn": "Nutrition specialist and fitness trainer.",
+    "DescriptionAr": "نور محمد هي أخصائية تغذية ومدربة لياقة بدنية، تقدم استشارات تغذوية وتدريباً فعالاً لتحسين الصحة واللياقة البدنية.",
+    "DescriptionEn": "Noor Mohammed is a nutrition specialist and fitness trainer, providing dietary consultations and effective training to enhance health and physical fitness.",
+    "Type": "Trainer",
+    "SpecialisesIn": [
+      "Sports Nutrition",
+      "Cardio Exercises"
+    ],
+    "InstagramUrl": "https://instagram.com/noor_mohammed",
+    "FacebookUrl": "https://facebook.com/noor.mohammed",
+    "PinterestUrl": "https://pinterest.com/noor_mohammed",
+    "YoutubeUrl": "https://youtube.com/noormohammedfitness",
+    "WebsiteUrl": "https://noormohammed.com"
+  },
+  {
+    "NameAr": "سامي جاد",
+    "NameEn": "Sami Jad",
+    "BriefAr": "رياضي محترف ومدرب.",
+    "BriefEn": "Professional athlete and trainer.",
+    "DescriptionAr": "سامي جاد هو رياضي محترف ومدرب يمتلك خبرة في رياضات متعددة ويمتاز بقدرة على تحسين الأداء البدني.",
+    "DescriptionEn": "Sami Jad is a professional athlete and trainer with experience in multiple sports and a strong ability to enhance physical performance.",
+    "Type": "Athlete",
+    "SpecialisesIn": [
+      "Martial Arts",
+      "Physical Training"
+    ],
+    "InstagramUrl": "https://instagram.com/sami_jad",
+    "FacebookUrl": "https://facebook.com/sami.jad",
+    "PinterestUrl": "https://pinterest.com/sami_jad",
+    "YoutubeUrl": "https://youtube.com/samijadfitness",
+    "WebsiteUrl": "https://sami.jad.com"
+  },
+  {
+    "NameAr": "ليلى مصطفى",
+    "NameEn": "Laila Mustafa",
+    "BriefAr": "مدربة لياقة متخصصة في اليوغا.",
+    "BriefEn": "Yoga specialist fitness trainer.",
+    "DescriptionAr": "ليلى مصطفى هي مدربة لياقة متخصصة في اليوغا، تقدم برامج تمرين وتهدئة لتحسين الرفاهية البدنية والعقلية.",
+    "DescriptionEn": "Laila Mustafa is a fitness trainer specializing in yoga, offering exercise and relaxation programs to improve physical and mental well-being.",
+    "Type": "Trainer",
+    "SpecialisesIn": [
+      "Yoga",
+      "Meditation"
+    ],
+    "InstagramUrl": "https://instagram.com/laila_mustafa",
+    "FacebookUrl": "https://facebook.com/laila.mustafa",
+    "PinterestUrl": "https://pinterest.com/laila_mustafa",
+    "YoutubeUrl": "https://youtube.com/lailamustafafitness",
+    "WebsiteUrl": "https://lailamustafa.com"
+  }
+]

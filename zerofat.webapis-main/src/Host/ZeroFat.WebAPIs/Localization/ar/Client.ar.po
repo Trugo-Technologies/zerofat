@@ -1,0 +1,30 @@
+﻿
+msgid "Activity not found"
+msgstr "النشاط غير موجود"
+
+msgid "Workouts per week must be more than 0"
+msgstr "عدد التمارين يجب ان يكون اكبر من 0"
+
+msgid "Percentage must be greater than 0"
+msgstr "النسبة المئوية يجب ان تكون اكبر من 0"
+
+msgid "Percentage must be less than or equal to 1"
+msgstr "النسبة المئوية يجب ان تكون اصغر او تساوي ال 1"
+
+msgid "Can not be deleted, because it's linked with clients"
+msgstr "لايمكن حذفها لارتباطها مع عملاء"
+
+msgid "Client not found"
+msgstr "العميل غير موجود"
+
+msgid "Wrong code"
+msgstr "الرمز خاطئ"
+
+msgid "Location not found"
+msgstr "الموقع غير موجود"
+
+msgid "Statistics not found"
+msgstr "الاحصائيات غير موجودة"
+
+msgid "Statistics already exists"
+msgstr "الاحصائيات موجودة مسبقا"

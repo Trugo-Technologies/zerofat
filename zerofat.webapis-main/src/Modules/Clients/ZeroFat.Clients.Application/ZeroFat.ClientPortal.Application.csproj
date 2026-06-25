@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="ClientManagement\DailyStatistics\**" />
+    <EmbeddedResource Remove="ClientManagement\DailyStatistics\**" />
+    <None Remove="ClientManagement\DailyStatistics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\ZeroFat.Application\ZeroFat.Application.csproj" />
+    <ProjectReference Include="..\ZeroFat.Clients.Domain\ZeroFat.ClientPortal.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

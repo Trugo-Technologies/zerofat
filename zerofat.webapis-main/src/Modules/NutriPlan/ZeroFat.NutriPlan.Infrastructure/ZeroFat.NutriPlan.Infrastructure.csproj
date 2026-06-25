@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="Seedings\NutriPlan\NutriPlanSettingsSeeder.cs" />
+    <Compile Remove="Seedings\NutriPlan\RecipesSeeder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Seedings\NutriPlan\nutriPlanSettings.json" />
+    <None Remove="Seedings\NutriPlan\recipes.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\ZeroFat.Infrastructure\ZeroFat.Infrastructure.csproj" />
+    <ProjectReference Include="..\ZeroFat.NutriPlan.Application\ZeroFat.NutriPlan.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Seedings\NutriPlan\categories.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seedings\NutriPlan\mealPlans.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seedings\NutriPlan\measurementUnits.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seedings\NutriPlan\allergens.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Seedings\NutriPlan\mealTypes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Nutrition\" />
+  </ItemGroup>
+
+</Project>

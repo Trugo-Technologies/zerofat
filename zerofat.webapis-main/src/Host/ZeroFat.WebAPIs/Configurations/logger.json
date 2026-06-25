@@ -1,0 +1,46 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "System": "Warning",
+      "Microsoft": "Warning",
+      "Hangfire": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    },
+    "File": {
+      "MinimumLogEventLevel": "Debug"
+    }
+  },
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Sinks.Seq", "Serilog.Sinks.MSSqlServer" ],
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning",
+        "Hangfire": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "Logs/log.json",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": 7,
+          "formatter": "Serilog.Formatting.Json.JsonFormatter, Serilog"
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId", "WithProcessId", "WithEnvironmentUserName", "WithHangfireContext", "WithExceptionDetails" ],
+    "Properties": {
+      "Application": "ZeroFAT"
+    }
+  }
+}

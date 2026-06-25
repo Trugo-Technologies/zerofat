@@ -1,0 +1,52 @@
+stages:
+  - build
+  - push
+
+variables:
+  # Required CI/CD variables (set in GitLab UI):
+  # - AWS_ECR_REGISTRY: "013364996232.dkr.ecr.ap-southeast-1.amazonaws.com"
+  # - AWS_DEFAULT_REGION: "ap-southeast-1"
+  # - AWS_ACCESS_KEY_ID
+  # - AWS_SECRET_ACCESS_KEY
+  
+  # Image configuration
+  AWS_ECR_REPOSITORY: "zerofat-api"
+  IMAGE_NAME: "zerofat-api"
+  IMAGE_TAG: "v1"  # or "$CI_COMMIT_SHORT_SHA"
+  
+  # Properly formatted derived variable
+  ECR_IMAGE_URI: "${AWS_ECR_REGISTRY}/${AWS_ECR_REPOSITORY}:${IMAGE_TAG}"
+
+before_script:
+  - echo "Preparing build environment for ${IMAGE_NAME}"
+  - echo "Using ECR Registry ${AWS_ECR_REGISTRY}"
+
+build:
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}"
+    - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+    - docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${ECR_IMAGE_URI}
+    - docker save -o image.tar ${ECR_IMAGE_URI}
+  artifacts:
+    paths:
+      - image.tar
+
+push_to_ecr:
+  stage: push
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  before_script:
+    - apk add --no-cache python3 py3-pip
+    - pip3 install awscli
+  script:
+    - docker load -i image.tar
+    - echo "Authenticating with ECR in ${AWS_DEFAULT_REGION}"
+    - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY}
+    - echo "Pushing ${ECR_IMAGE_URI}"
+    - docker push ${ECR_IMAGE_URI}
+    - echo "Successfully pushed to ECR"

@@ -1,0 +1,20 @@
+{
+  "DatabaseOptions": {
+    "Provider": "postgresql",
+    "ConnectionString": "Host=localhost;Database=zerofatdb;Username=postgres;Password=;"
+  },
+  "Modules": {
+    "Identity": {
+
+    },
+    "Workout": {
+
+    },
+    "Shared": {
+
+    },
+    "Client": {
+
+    }
+  }
+}

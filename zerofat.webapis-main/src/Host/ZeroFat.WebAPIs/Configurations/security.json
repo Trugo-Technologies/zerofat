@@ -1,0 +1,15 @@
+{
+  "SecuritySettings": {
+    "Provider": "Jwt",
+    "JwtSettings": {
+      "key": "",
+      "Issuer": "ZeroFAT",
+      "Audience": "ZeroFAT",
+      "TokenExpirationInMinutes": 1440,
+      "RefreshTokenExpirationInDays": 30,
+      "LinksExpirationInMinutes": 15,
+      "EnableDefaultOTP": true,
+      "DefaultOTP": "9853"
+    }
+  }
+}

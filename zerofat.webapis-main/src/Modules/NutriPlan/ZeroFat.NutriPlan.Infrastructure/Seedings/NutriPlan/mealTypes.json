@@ -1,0 +1,38 @@
+[
+  {
+    "NameEn": "Breakfast",
+    "NameAr": "فطور",
+    "Index": 1,
+    "IsDefault": true,
+    "ImageUrl": "Files/Images/MealTypes/v-04.png"
+
+  },
+  {
+    "NameEn": "Lunch",
+    "NameAr": "غداء",
+    "Index": 2,
+    "IsDefault": false,
+    "ImageUrl": "Files/Images/MealTypes/v-04.png"
+  },
+  {
+    "NameEn": "Dinner",
+    "NameAr": "عشاء",
+    "Index": 3,
+    "IsDefault": false,
+    "ImageUrl": "Files/Images/MealTypes/v-04.png"
+  },
+  {
+    "NameEn": "Snack",
+    "NameAr": "وجبة خفيفة",
+    "Index": 4,
+    "IsDefault": false,
+    "ImageUrl": "Files/Images/MealTypes/v-04.png"
+  },
+  {
+    "NameEn": "Dessert",
+    "NameAr": "حلوى",
+    "Index": 5,
+    "IsDefault": false,
+    "ImageUrl": "Files/Images/MealTypes/v-04.png"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "NameAr": "الجزء السفلي من الجسم",
+    "NameEn": "Lower Body"
+  },
+  {
+    "NameAr": "الجزء العلوي من الجسم",
+    "NameEn": "Upper Body"
+  },
+  {
+    "NameAr": "كامل الجسم",
+    "NameEn": "Full Body"
+  },
+  {
+    "NameAr": "ذراع",
+    "NameEn": "Arm"
+  },
+  {
+    "NameAr": "ساق",
+    "NameEn": "Leg"
+  },
+  {
+    "NameAr": "ظهر",
+    "NameEn": "Back"
+  },
+  {
+    "NameAr": "صدر",
+    "NameEn": "Chest"
+  },
+  {
+    "NameAr": "كتف",
+    "NameEn": "Shoulder"
+  }
+]

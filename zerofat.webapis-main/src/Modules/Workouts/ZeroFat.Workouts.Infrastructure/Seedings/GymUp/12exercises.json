@@ -1,0 +1,101 @@
+[
+  {
+    "NameAr": "تمرين الضغط",
+    "NameEn": "Push-Up",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise1.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise1.mp4",
+    "InstructionsAr": "ابدأ بالاستلقاء على البطن، ثم ارفع الجسم باستخدام اليدين مع الحفاظ على استقامة الظهر.",
+    "InstructionsEn": "Start in a prone position, then lift your body using your arms, keeping your back straight.",
+    "Type": "Reps"
+  },
+  {
+    "NameAr": "سكوات",
+    "NameEn": "Squat",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise2.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise2.mp4",
+    "InstructionsAr": "قف مع قدميك بمسافة عرض الكتفين، ثم انخفض إلى الأسفل مع الحفاظ على ظهرك مستقيمًا.",
+    "InstructionsEn": "Stand with feet shoulder-width apart, then lower down while keeping your back straight.",
+    "Type": "WeightAndReps"
+  },
+  {
+    "NameAr": "القفز بالحبل",
+    "NameEn": "Jump Rope",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise3.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise3.mp4",
+    "InstructionsAr": "قف ممسكًا بالحبل ثم ابدأ بالقفز بوتيرة منتظمة.",
+    "InstructionsEn": "Stand holding the rope, then jump at a steady rhythm.",
+    "Type": "Duration"
+  },
+  {
+    "NameAr": "رفع الأثقال",
+    "NameEn": "Weightlifting",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise4.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise4.mp4",
+    "InstructionsAr": "امسك بالوزن وارفعه ببطء مع الحفاظ على استقامة الظهر.",
+    "InstructionsEn": "Hold the weight and lift slowly, keeping your back straight.",
+    "Type": "WeightAndReps"
+  },
+  {
+    "NameAr": "بلانك",
+    "NameEn": "Plank",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise5.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise5.mp4",
+    "InstructionsAr": "استلقِ على بطنك وارتكز على المرفقين وأطراف القدمين، حافظ على جسمك مستقيمًا.",
+    "InstructionsEn": "Lie on your stomach and support yourself on your elbows and toes, keeping your body straight.",
+    "Type": "Duration"
+  },
+  {
+    "NameAr": "قرفصاء البلغارية",
+    "NameEn": "Bulgarian Split Squat",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise6.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise6.mp4",
+    "InstructionsAr": "ضع قدمًا على مقعد خلفك وابدأ بالنزول ببطء حتى تصبح ركبتك الأمامية بزاوية 90 درجة.",
+    "InstructionsEn": "Place one foot on a bench behind you, and slowly lower until your front knee is at a 90-degree angle.",
+    "Type": "WeightAndReps"
+  },
+  {
+    "NameAr": "الدراجة الهوائية",
+    "NameEn": "Bicycle Crunch",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise7.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise7.mp4",
+    "InstructionsAr": "استلقِ على ظهرك، وارفع رجليك وحاول لمس الكوع للركبة المقابلة بالتناوب.",
+    "InstructionsEn": "Lie on your back, lift your legs, and alternate bringing opposite elbow to knee.",
+    "Type": "Reps"
+  },
+  {
+    "NameAr": "تمرين اللوح الجانبي",
+    "NameEn": "Side Plank",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise8.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise8.mp4",
+    "InstructionsAr": "استلقِ على جانبك وارتكز على مرفقك مع رفع الجسم للحفاظ على استقامة الجسم.",
+    "InstructionsEn": "Lie on your side, support yourself on your elbow, and lift your body to keep it straight.",
+    "Type": "Duration"
+  },
+  {
+    "NameAr": "رفع الركبة",
+    "NameEn": "Knee Raise",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise9.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise9.mp4",
+    "InstructionsAr": "قف وارفع ركبتيك واحدة تلو الأخرى باتجاه صدرك.",
+    "InstructionsEn": "Stand and lift each knee towards your chest alternately.",
+    "Type": "Reps"
+  },
+  {
+    "NameAr": "تمرين الظهر بالبار",
+    "NameEn": "Barbell Row",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise10.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise10.mp4",
+    "InstructionsAr": "امسك بالبار وارفعه نحو صدرك مع الحفاظ على استقامة الظهر.",
+    "InstructionsEn": "Hold the barbell and lift it towards your chest, keeping your back straight.",
+    "Type": "WeightAndReps"
+  },
+  {
+    "NameAr": "القفز العكسي",
+    "NameEn": "Reverse Lunge",
+    "AvatarImageUrl": "Files/Images/Exercises/exercise11.jpg",
+    "MediaUrl": "Files/Images/Exercises/exercise11.mp4",
+    "InstructionsAr": "قف مستقيمًا، واتخذ خطوة للخلف حتى تصل ركبتك الأمامية بزاوية 90 درجة.",
+    "InstructionsEn": "Stand straight, take a step back until your front knee reaches a 90-degree angle.",
+    "Type": "Reps"
+  }
+]

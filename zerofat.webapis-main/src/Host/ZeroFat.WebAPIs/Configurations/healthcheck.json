@@ -1,0 +1,17 @@
+{
+  "HealthChecksUI": {
+    "RootPath": "/healthcheck",
+    "UIPath": "/health-ui",
+    "ApiPath": "/health-api",
+    "DisableMigrations": false,
+    "HealthChecks": [
+      {
+        "Name": "ZEROFAT - Health Checks",
+        "Uri": "http://localhost:8080/health-api"
+      }
+    ],
+    "EvaluationTimeOnSeconds": 15,
+    "MinimumSecondsBetweenFailureNotifications": 60,
+    "MaximumExecutionHistoriesPerEndpoint": 15
+  }
+}

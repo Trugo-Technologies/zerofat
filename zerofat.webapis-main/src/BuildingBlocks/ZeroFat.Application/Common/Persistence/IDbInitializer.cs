@@ -1,0 +1,6 @@
+﻿namespace ZeroFat.Application.Common.Persistence;
+public interface IDbInitializer
+{
+    Task MigrateAsync(CancellationToken cancellationToken);
+    Task SeedAsync(CancellationToken cancellationToken);
+}

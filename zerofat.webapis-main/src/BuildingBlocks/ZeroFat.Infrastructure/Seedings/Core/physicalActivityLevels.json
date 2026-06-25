@@ -1,0 +1,42 @@
+[
+  {
+    "ImageUrl": null,
+    "DescriptionAr": null,
+    "DescriptionEn": "Very Light",
+    "ExampleEn": "Almost no activity at all.",
+    "ExampleAr": null,
+    "ActivityValue": 1.5
+  },
+  {
+    "ImageUrl": null,
+    "DescriptionAr": null,
+    "DescriptionEn": "Light",
+    "ExampleEn": "walking, non-strenuous cycling or gardening approximately once a week.",
+    "ExampleAr": null,
+    "ActivityValue": 1.6
+  },
+  {
+    "ImageUrl": null,
+    "DescriptionAr": null,
+    "DescriptionEn": "Moderate",
+    "ExampleEn": "Regular activity at least once a week, e.g., walking, bicycling, or gardening or walking to work 10–30 min day.",
+    "ExampleAr": null,
+    "ActivityValue": 1.7
+  },
+  {
+    "ImageUrl": null,
+    "DescriptionAr": null,
+    "DescriptionEn": "Active",
+    "ExampleEn": "Regular activities more than once a week, e.g., intense walking or bicycling or sports",
+    "ExampleAr": null,
+    "ActivityValue": 1.8
+  },
+  {
+    "ImageUrl": null,
+    "DescriptionAr": null,
+    "DescriptionEn": "Very Active",
+    "ExampleEn": "Strenuous activities several times a week.",
+    "ExampleAr": null,
+    "ActivityValue": 2
+  }
+]

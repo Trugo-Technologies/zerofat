@@ -1,0 +1,19 @@
+{
+  "LocalizationSettings": {
+    "SupportedCultures": [
+      "en-US",
+      "ar",
+      "en",
+      "fr",
+      "fr-FR",
+      "de",
+      "de-DE"
+      //"it",
+      //"it-IT"
+    ],
+    "ResourcesPath": "Localization",
+    "DefaultRequestCulture": "en",
+    "FallbackToParent": true,
+    "EnableLocalization": true
+  }
+}

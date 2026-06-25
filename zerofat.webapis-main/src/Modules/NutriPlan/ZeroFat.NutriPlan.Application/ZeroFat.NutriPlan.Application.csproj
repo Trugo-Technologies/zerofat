@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="Settings\MeasurementUnits\UpdateMeasurementUnitRequest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.Core" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\ZeroFat.Application\ZeroFat.Application.csproj" />
+    <ProjectReference Include="..\ZeroFat.NutriPlan.Domain\ZeroFat.NutriPlan.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

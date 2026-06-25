@@ -1,0 +1,98 @@
+[
+  {
+    "NameEn": "Low Carb",
+    "NameAr": "منخفض الكربوهيدرات",
+    "DescriptionEn": "A meal plan with reduced carbohydrate intake to support weight loss and improve metabolic health.",
+    "DescriptionAr": "خطة وجبات مع تقليل تناول الكربوهيدرات لدعم فقدان الوزن وتحسين الصحة الأيضية.",
+    "Code": "LOWCARB",
+    "ImageUrl": "Files/Images/MealPlans/v-01.png",
+    "Images": [
+      "Files/Images/MealPlans/v-01.png",
+      "Files/Images/MealPlans/v-01.png"
+    ],
+    "DefaultDietitianGoal": "LoseWeight",
+    "CarbPercentage": 20.0,
+    "ProteinPercentage": 35.0,
+    "FatPercentage": 45.0
+  },
+  {
+    "NameEn": "High Protein",
+    "NameAr": "عالي البروتين",
+    "DescriptionEn": "A meal plan focused on increasing protein intake to build muscle and aid in recovery.",
+    "DescriptionAr": "خطة وجبات تركز على زيادة تناول البروتين لبناء العضلات والمساعدة في التعافي.",
+    "Code": "HIGHPROT",
+    "ImageUrl": "Files/Images/MealPlans/v-02.png",
+    "Images": [
+      "Files/Images/MealPlans/v-01.png",
+      "Files/Images/MealPlans/v-01.png"
+    ],
+    "DefaultDietitianGoal": "BuildMuscles",
+    "CarbPercentage": 30.0,
+    "ProteinPercentage": 50.0,
+    "FatPercentage": 20.0
+  },
+  {
+    "NameEn": "Keto",
+    "NameAr": "كيتو",
+    "DescriptionEn": "A ketogenic meal plan that emphasizes high-fat and very low-carb intake to induce ketosis.",
+    "DescriptionAr": "خطة وجبات كيتونية تركز على تناول الدهون العالية وانخفاض الكربوهيدرات جداً لتحقيق الحالة الكيتونية.",
+    "Code": "KETO",
+    "ImageUrl": "Files/Images/MealPlans/v-03.png",
+    "Images": [
+      "Files/Images/MealPlans/v-01.png",
+      "Files/Images/MealPlans/v-01.png"
+    ],
+    "DefaultDietitianGoal": "LoseFat",
+    "CarbPercentage": 5.0,
+    "ProteinPercentage": 20.0,
+    "FatPercentage": 75.0
+  },
+  {
+    "NameEn": "Balanced",
+    "NameAr": "متوازن",
+    "DescriptionEn": "A meal plan that provides a balanced intake of carbohydrates, proteins, and fats for overall health.",
+    "DescriptionAr": "خطة وجبات توفر تناولاً متوازناً من الكربوهيدرات والبروتينات والدهون للصحة العامة.",
+    "Code": "BALANCE",
+    "ImageUrl": "Files/Images/MealPlans/v-01.png",
+    "Images": [
+      "Files/Images/MealPlans/v-01.png",
+      "Files/Images/MealPlans/v-01.png"
+    ],
+    "DefaultDietitianGoal": "LoseWeight",
+    "CarbPercentage": 50.0,
+    "ProteinPercentage": 25.0,
+    "FatPercentage": 25.0
+  },
+  {
+    "NameEn": "Mediterranean",
+    "NameAr": "متوسطي",
+    "DescriptionEn": "A meal plan inspired by Mediterranean cuisine, emphasizing healthy fats, vegetables, and whole grains.",
+    "DescriptionAr": "خطة وجبات مستوحاة من المطبخ المتوسطي، تركز على الدهون الصحية والخضروات والحبوب الكاملة.",
+    "Code": "MEDITERR",
+    "ImageUrl": "Files/Images/MealPlans/v-02.png",
+    "Images": [
+      "Files/Images/MealPlans/v-01.png",
+      "Files/Images/MealPlans/v-01.png"
+    ],
+    "DefaultDietitianGoal": "GeneralHealth",
+    "CarbPercentage": 45.0,
+    "ProteinPercentage": 20.0,
+    "FatPercentage": 35.0
+  },
+  {
+    "NameEn": "Vegan",
+    "NameAr": "نباتي",
+    "DescriptionEn": "A meal plan that excludes all animal products and focuses on plant-based nutrition.",
+    "DescriptionAr": "خطة وجبات تستثني جميع المنتجات الحيوانية وتركز على التغذية النباتية.",
+    "Code": "VEGAN",
+    "ImageUrl": "Files/Images/MealPlans/v-03.png",
+    "Images": [
+      "Files/Images/MealPlans/v-01.png",
+      "Files/Images/MealPlans/v-01.png"
+    ],
+    "DefaultDietitianGoal": "GeneralHealth",
+    "CarbPercentage": 60.0,
+    "ProteinPercentage": 15.0,
+    "FatPercentage": 25.0
+  }
+]

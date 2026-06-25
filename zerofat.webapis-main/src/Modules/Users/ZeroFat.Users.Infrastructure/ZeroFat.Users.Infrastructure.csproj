@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <ItemGroup>
+    <Compile Remove="Identity\Users\Configuration\**" />
+    <Compile Remove="Identity\Users\Exceptions\**" />
+    <Compile Remove="Identity\Users\Passwords\**" />
+    <Compile Remove="Identity\Users\Seeder\**" />
+    <EmbeddedResource Remove="Identity\Users\Configuration\**" />
+    <EmbeddedResource Remove="Identity\Users\Exceptions\**" />
+    <EmbeddedResource Remove="Identity\Users\Passwords\**" />
+    <EmbeddedResource Remove="Identity\Users\Seeder\**" />
+    <None Remove="Identity\Users\Configuration\**" />
+    <None Remove="Identity\Users\Exceptions\**" />
+    <None Remove="Identity\Users\Passwords\**" />
+    <None Remove="Identity\Users\Seeder\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="Identity\Users\Services\ISignInManager.cs" />
+    <Compile Remove="Identity\Users\Services\IUsersRepository.cs" />
+    <Compile Remove="Identity\Users\Services\RoleManagementService.cs" />
+    <Compile Remove="Identity\Users\Services\SignInManagementService.cs" />
+    <Compile Remove="Identity\Users\Services\UserAccountSignInManager.cs" />
+    <Compile Remove="Identity\Users\Services\UserManagementService.cs" />
+    <Compile Remove="Identity\Users\UserManagementModule.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\ZeroFat.Infrastructure\ZeroFat.Infrastructure.csproj" />
+    <ProjectReference Include="..\ZeroFat.Users.Application\ZeroFat.Users.Application.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Identity\Jwt\Claims\" />
+    <Folder Include="Identity\Users\Services\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,44 @@
+[
+  {
+    "NameAr": "أوزان حرة",
+    "NameEn": "Free Weights",
+    "Equipments": [
+      {
+        "NameAr": "دمبل",
+        "NameEn": "Dumbbell"
+      },
+      {
+        "NameAr": "بار",
+        "NameEn": "Barbell"
+      }
+    ]
+  },
+  {
+    "NameAr": "آلات رياضية",
+    "NameEn": "Machines",
+    "Equipments": [
+      {
+        "NameAr": "آلة تمرين الأرجل",
+        "NameEn": "Leg Press Machine"
+      },
+      {
+        "NameAr": "آلة تمديد الأرجل",
+        "NameEn": "Leg Extension Machine"
+      }
+    ]
+  },
+  {
+    "NameAr": "أجهزة القلب",
+    "NameEn": "Cardio Equipment",
+    "Equipments": [
+      {
+        "NameAr": "جهاز الجري",
+        "NameEn": "Treadmill"
+      },
+      {
+        "NameAr": "دراجة ثابتة",
+        "NameEn": "Stationary Bike"
+      }
+    ]
+  }
+]

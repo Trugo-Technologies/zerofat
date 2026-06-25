@@ -1,0 +1,122 @@
+[
+  {
+    "NameEn": "Cube",
+    "NameAr": "مكعب",
+    "Code": "KOSTKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Snoop",
+    "NameAr": "سنوب",
+    "Code": "GALKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Leaf",
+    "NameAr": "ورقة",
+    "Code": "LISC",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Bag",
+    "NameAr": "كيس",
+    "Code": "TOREBKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Slice",
+    "NameAr": "شريحة",
+    "Code": "PLASTEREK",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Tin",
+    "NameAr": "علبة",
+    "Code": "PUSZKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Stalk",
+    "NameAr": "ساق",
+    "Code": "LODYGA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Package",
+    "NameAr": "عبوة",
+    "Code": "OPAKOWANIE",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Portion",
+    "NameAr": "حصة",
+    "Code": "PORCJA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Bunch",
+    "NameAr": "حزمة",
+    "Code": "PECZEK",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Clove",
+    "NameAr": "فص",
+    "Code": "ZABEK",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Cup",
+    "NameAr": "كوب",
+    "Code": "SZKLANKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Glass",
+    "NameAr": "كأس",
+    "Code": "KIELISZEK",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Pinch",
+    "NameAr": "رشة",
+    "Code": "SZCZYPTA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Handful",
+    "NameAr": "حفنة",
+    "Code": "GARSC",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Piece",
+    "NameAr": "قطعة",
+    "Code": "SZTUKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Teaspoon",
+    "NameAr": "ملعقة شاي",
+    "Code": "LYZECZKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Tablespoon",
+    "NameAr": "ملعقة طعام",
+    "Code": "LYZKA",
+    "IsDefault": false
+  },
+  {
+    "NameEn": "Gram",
+    "NameAr": "جرام",
+    "Code": "G",
+    "IsDefault": true
+  },
+  {
+    "NameEn": "Milliliter",
+    "NameAr": "ملليلتر",
+    "Code": "ML",
+    "IsDefault": true
+  }
+]

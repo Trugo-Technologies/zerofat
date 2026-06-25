@@ -1,0 +1,27 @@
+﻿
+msgid "Advertisement not found"
+msgstr "الاعلان غير موجود"
+
+msgid "Category not found"
+msgstr "الصنف غير موجود"
+
+msgid "Arabic name already exists"
+msgstr "الاسم العربي موجود مسبقا"
+
+msgid "English name already exists"
+msgstr "الاسم الاجنبي موجود مسبقا"
+
+msgid "Can not be deleted, because it's linked with FAQs"
+msgstr "لا يمكن حذفه، لأنه مرتبط بأسئلة شائعة"
+
+msgid "FAQ not found"
+msgstr "السؤال غير موجود"
+
+msgid "Subscription plan not found"
+msgstr "الخطه غير موجودة"
+
+msgid "The plan has already published"
+msgstr "تم رفع الخطه مسبقا"
+
+msgid "Something went wrong"
+msgstr "حدث خطا ما"

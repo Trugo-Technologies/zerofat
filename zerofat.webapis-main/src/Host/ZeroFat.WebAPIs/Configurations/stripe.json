@@ -1,0 +1,8 @@
+{
+  "StripeSettings": {
+    "SecretKey": "",
+    "Currency": "AED",
+    "SuccessUrlDomain": "https://api-app.zerofat.ai/api/clientPortal-module",
+    "CheckoutCompletedSecretKey": ""
+  }
+}

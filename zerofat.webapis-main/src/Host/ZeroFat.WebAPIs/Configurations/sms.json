@@ -1,0 +1,23 @@
+{
+  "SMS": {
+    "Provider": "Etisalat",
+    "Twilio": {
+      "FromPhoneNumber": "",
+      "AccountSid": "",
+      "MessagingServiceSid": "",
+      "AuthToken": ""
+    },
+    "Etisalat": {
+      "LoginEndpoint": "https://smartmessaging.etisalat.ae:5676/login/user/",
+      "SendSmsEndpoint": "https://smartmessaging.etisalat.ae:5676/campaigns/submissions/sms/nb",
+      "Username": "",
+      "Password": "",
+
+      "TransactionSenderId": "ZEROFAT APP",
+      "TransactionCategoryId": "4.5",
+
+      "PromotionalSenderId": "AD-ZEROFAT",
+      "PromotionalCategoryId": "4.6"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "Storage": {
+    "Provider": "Amazon",
+    "MasterEncryptionKey": "",
+    "Local": {
+      "Path": "Files"
+    },
+    "Azure": {
+      "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=xxx;AccountKey=xxx;EndpointSuffix=core.windows.net",
+      "Container": "test"
+    },
+    "Amazon": {
+      "AccessKeyID": "",
+      "SecretAccessKey": "",
+      "BucketName": "zerofat",
+      "RegionEndpoint": "ap-southeast-1"
+    }
+  }
+}

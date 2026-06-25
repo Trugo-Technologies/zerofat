@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\ZeroFat.Infrastructure\ZeroFat.Infrastructure.csproj" />
+    <ProjectReference Include="..\ZeroFat.Clients.Application\ZeroFat.ClientPortal.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Seedings\ClientPortal\clientPortalSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

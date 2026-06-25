@@ -1,0 +1,25 @@
+{
+  "PaymobSettings": {
+    "Url": "https://uae.paymob.com/",
+    "Username": "",
+    "Password": "",
+    "ApiKey": "",
+    "SecretKey": "",
+    "PublicKey": "",
+    "CreateSubscriptionPlanLinkUrl": "api/acceptance/subscription-plans",
+    "UpdateSubscriptionPlanLinkUrl": "api/acceptance/subscription-plans/{id}",
+    "ListSubscriptionPlanLinkUrl": "api/acceptance/subscription-plans",
+    "SuspendSubscriptionPlanLinkUrl": "api/acceptance/subscription-plans/{id}/suspend",
+    "ResumeSubscriptionPlanLinkUrl": "api/acceptance/subscription-plans/{id}/resume",
+    "CreatePaymentLinkUrl": "api/ecommerce/payment-links",
+    "CreateIntentionLinkUrl": "v1/intention/",
+    "SuspendSubscriptionUrl": "api/acceptance/subscriptions/{id}/suspend",
+    "ResumeSubscriptionUrl": "api/acceptance/subscriptions/{id}/resume",
+    "CancelSubscriptionUrl": "api/acceptance/subscriptions/{id}/cancel",
+    "UpdateSubscriptionUrl": "api/acceptance/subscriptions/{id}",
+    "GetSubscriptionUrl": "api/acceptance/subscriptions/{id}",
+    "QuicklinksLoginUrl": "api/auth/tokens",
+    "PaymentMethods": [ 50507 ],
+    "IsLive": false
+  }
+}

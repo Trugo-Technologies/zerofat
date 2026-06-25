@@ -1,0 +1,62 @@
+[
+  {
+    "PropertyName": "OffsetSubscriptionInDays",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "2"
+  },
+  {
+    "PropertyName": "NutriPlanBasedStartegy",
+    "PropertyType": "String",
+    "ApplicationModule": "ClientPortal",
+    "Value": "BasedOnCalories"
+  },
+  {
+    "PropertyName": "WeeklyCaloricDeficit",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "700"
+  },
+  {
+    "PropertyName": "WeeklyCaloricSurplus",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "400"
+  },
+  {
+    "PropertyName": "DefaultNutriPlanTimeAvailable",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "0"
+  },
+  {
+    "PropertyName": "MonthlyPackageSubsciptionDiscount",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "5"
+  },
+  {
+    "PropertyName": "MinimumSubsciption",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "1000"
+  },
+  {
+    "PropertyName": "ThreeMonthlyPackageSubsciptionDiscount",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "8"
+  },
+  {
+    "PropertyName": "OnePointEqualInMoney",
+    "PropertyType": "Number",
+    "ApplicationModule": "ClientPortal",
+    "Value": "8"
+  },
+  {
+    "PropertyName": "EnableDailyMealSelections",
+    "PropertyType": "Boolean",
+    "ApplicationModule": "ClientPortal",
+    "Value": "false"
+  }
+] 

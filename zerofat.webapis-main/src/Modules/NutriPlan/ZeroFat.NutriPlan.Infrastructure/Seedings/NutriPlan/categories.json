@@ -1,0 +1,72 @@
+[
+  {
+    "NameEn": "Vegetables",
+    "NameAr": "خضروات",
+    "IconUrl": "https://example.com/icons/vegetables.png",
+    "ImageUrl": "https://example.com/images/vegetables.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Fruits",
+    "NameAr": "فواكه",
+    "IconUrl": "https://example.com/icons/fruits.png",
+    "ImageUrl": "https://example.com/images/fruits.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Meat",
+    "NameAr": "لحوم",
+    "IconUrl": "https://example.com/icons/meat.png",
+    "ImageUrl": "https://example.com/images/meat.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Grains",
+    "NameAr": "حبوب",
+    "IconUrl": "https://example.com/icons/grains.png",
+    "ImageUrl": "https://example.com/images/grains.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Dairy",
+    "NameAr": "منتجات الألبان",
+    "IconUrl": "https://example.com/icons/dairy.png",
+    "ImageUrl": "https://example.com/images/dairy.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Nuts & Seeds",
+    "NameAr": "مكسرات وبذور",
+    "IconUrl": "https://example.com/icons/nuts_seeds.png",
+    "ImageUrl": "https://example.com/images/nuts_seeds.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Spices",
+    "NameAr": "توابل",
+    "IconUrl": "https://example.com/icons/spices.png",
+    "ImageUrl": "https://example.com/images/spices.jpg",
+    "CategoryType": "Ingredient"
+  },
+  {
+    "NameEn": "Low Carb Recipes",
+    "NameAr": "وصفات منخفضة الكربوهيدرات",
+    "IconUrl": "https://example.com/icons/low_carb.png",
+    "ImageUrl": "https://example.com/images/low_carb.jpg",
+    "CategoryType": "Recipe"
+  },
+  {
+    "NameEn": "Vegan Recipes",
+    "NameAr": "وصفات نباتية",
+    "IconUrl": "https://example.com/icons/vegan.png",
+    "ImageUrl": "https://example.com/images/vegan.jpg",
+    "CategoryType": "Recipe"
+  },
+  {
+    "NameEn": "High Protein Recipes",
+    "NameAr": "وصفات عالية البروتين",
+    "IconUrl": "https://example.com/icons/high_protein.png",
+    "ImageUrl": "https://example.com/images/high_protein.jpg",
+    "CategoryType": "Recipe"
+  }
+]

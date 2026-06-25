@@ -1,0 +1,32 @@
+[
+  {
+    "PropertyName": "OffsetSubscriptionInDays",
+    "PropertyType": "Number",
+    "ApplicationModule": "NutriPlan",
+    "Value": "2"
+  },
+  {
+    "PropertyName": "NutriPlanBasedStartegy",
+    "PropertyType": "String",
+    "ApplicationModule": "NutriPlan",
+    "Value": "BasedOnCalories"
+  },
+  {
+    "PropertyName": "WeeklyCaloricDeficit",
+    "PropertyType": "Number",
+    "ApplicationModule": "NutriPlan",
+    "Value": "700"
+  },
+  {
+    "PropertyName": "WeeklyCaloricSurplus",
+    "PropertyType": "Number",
+    "ApplicationModule": "NutriPlan",
+    "Value": "400"
+  },
+  {
+    "PropertyName": "DefaultNutriPlanTimeAvailable",
+    "PropertyType": "Number",
+    "ApplicationModule": "NutriPlan",
+    "Value": null
+  }
+]

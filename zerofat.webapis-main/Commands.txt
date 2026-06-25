@@ -1,0 +1,19 @@
+﻿Add-Migration Client -Context ZeroFat.Infrastructure.Persistence.Context.SharedContext -o Migrations\Shared
+﻿Add-Migration initgTable -Context ZeroFat.GymUp.Infrastructure.Persistence.Context.GymUpContext -o Migrations\GymUp
+
+Add-Migration addthumbnailImage -Context ZeroFat.Infrastructure.Core.Persistence.Context.CoreContext -o Migrations\Core
+Add-Migration initUsersTable -Context ZeroFat.Users.Infrastructure.Persistence.Context.UsersContext -o Migrations\Users
+Add-Migration workingOnCustomMeal -Context ZeroFat.NutriPlan.Infrastructure.Persistence.Context.NutriPlanContext -o Migrations\NutriPlan
+Add-Migration addIsDeletedToClient -Context ZeroFat.ClientPortal.Infrastructure.Persistence.Context.ClientPortalContext -o Migrations\ClientPortal
+Add-Migration addthumbnailImage -Context ZeroFat.GymUp.Infrastructure.Persistence.Context.GymUpContext -o Migrations\GymUp
+﻿
+Add-Migration initUsersTable -Context ZeroFat.Users.Infrastructure.Persistence.Context.UsersContext -o Migrations\Users
+﻿Add-Migration initNutriPlanTable -Context ZeroFat.NutriPlan.Infrastructure.Persistence.Context.NutriPlanContext -o Migrations\NutriPlan
+﻿Add-Migration initWorkoutTable -Context ZeroFat.Workout.Infrastructure.Persistence.Context.WorkoutContext -o Migrations\Workout
+
+Add-Migration subscriptionPlan -Context ZeroFat.Infrastructure.Core.Persistence.Context.CoreContext -o Migrations\Core
+
+Add-Migration workingOnRecips -Context ZeroFat.NutriPlan.Infrastructure.Persistence.Context.NutriPlanContext -o Migrations\NutriPlan
+
+Add-Migration addClientSubscription -Context ZeroFat.ClientPortal.Infrastructure.Persistence.Context.ClientPortalContext -o Migrations\ClientPortal
+Add-Migration cleanDb -Context ZeroFat.NutriPlan.Infrastructure.Persistence.Context.NutriPlanContext -o Migrations\NutriPlan

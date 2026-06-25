@@ -1,0 +1,20 @@
+[
+  {
+    "TitleEn": "Week plan subscription",
+    "TitleAr": "اشتراك اسبوعي",
+    "SubscriptionModule": "NutriPlan",
+    "SubscriptionType": "OneWeek"
+  },
+  {
+    "TitleEn": "Month plan subscription",
+    "TitleAr": "اشتراك شهري",
+    "SubscriptionModule": "NutriPlan",
+    "SubscriptionType": "OneMonth"
+  },
+  {
+    "TitleEn": "Three months plan subscription",
+    "TitleAr": "اشتراك لمده ثلاث شهور",
+    "SubscriptionModule": "NutriPlan",
+    "SubscriptionType": "ThreeMonths"
+  }
+]

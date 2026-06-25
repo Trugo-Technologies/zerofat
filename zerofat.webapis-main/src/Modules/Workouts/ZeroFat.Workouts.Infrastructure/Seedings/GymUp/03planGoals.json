@@ -1,0 +1,57 @@
+[
+  {
+    "NameAr": "فقدان الوزن",
+    "NameEn": "Weight Loss",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/47e7b2f8-d82a-4114-a719-83c8324de1c6.jpg"
+  },
+  {
+    "NameAr": "بناء الاجسام",
+    "NameEn": "Muscle Build",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/3a0328df-b4e7-4294-82d8-f3ef9c6ab92c.jpg"
+  },
+  {
+    "NameAr": "حرق الدهون",
+    "NameEn": "Fat Burn",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/31e3ebf7-8506-4dbc-a7e2-e88c13e677de.jpg"
+  },
+  {
+    "NameAr": "المرونة",
+    "NameEn": "Mobility Flow",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/886de0d6-62fe-4148-959c-0aa0842572f3.jpg"
+  },
+  {
+    "NameAr": "نحت الجسم",
+    "NameEn": "Sculpt",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/f91b0751-9c0d-4490-8027-ba14d6a0eee3.jpg"
+  },
+  {
+    "NameAr": "التحمل التكييف",
+    "NameEn": "Conditioning",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/10d2423e-0c48-4b87-939b-5fd2bde665fc.jpg"
+  },
+  {
+    "NameAr": "أداء الرياضي",
+    "NameEn": "Performance",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/dcc0c3fa-f25d-4d70-87da-957f0cb110aa.jpg"
+  },
+  {
+    "NameAr": "إعادة التأهيل",
+    "NameEn": "Rehabilitation",
+    "ImageUrl": "Files/Workout/Images/PlanGoal/8102f23d-534a-4900-b8fa-3612619b38df.jpg"
+  },
+  {
+    "NameAr": "اللياقة العامة",
+    "NameEn": "General Fitness demo",
+    "ImageUrl": "Files/Images/PlanGoals/goal3.jpg"
+  },
+  {
+    "NameAr": "بناء العضلات",
+    "NameEn": "Muscle Building demo",
+    "ImageUrl": "Files/Images/PlanGoals/goal2.jpg"
+  },
+  {
+    "NameAr": "إنقاص الوزن",
+    "NameEn": "Weight Loss demo",
+    "ImageUrl": "Files/Images/PlanGoals/goal1.jpg"
+  }
+]

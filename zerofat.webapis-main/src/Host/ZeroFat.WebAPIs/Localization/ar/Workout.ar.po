@@ -1,0 +1,111 @@
+﻿
+msgid "Body part not found"
+msgstr "العضو غير موجود"
+
+msgid "Arabic name already exists"
+msgstr "الاسم العربي موجود مسبقا"
+
+msgid "English name already exists"
+msgstr "الاسم الاجنبي موجود مسبقا"
+
+msgid "Category not found"
+msgstr "الصنف غير موجود"
+
+msgid "Equipment not found"
+msgstr "الآلة الرياضية غير موجودة"
+
+msgid "Goal not found"
+msgstr "الهدف غير موجود"
+
+msgid "Type not found"
+msgstr "النوع غير موجود"
+
+msgid "Exercise not found"
+msgstr "التمرين غير موجود"
+
+msgid "Workout exercise not found"
+msgstr "التمرين غير موجود"
+
+msgid "Plan not found"
+msgstr "الخطة الرياضية غير موجود"
+
+msgid "Trainer not found"
+msgstr "المدرب غير موجود"
+
+msgid "Workout not found"
+msgstr "التمرين الرياضي غير موجود"
+
+msgid "Exercise body part not found"
+msgstr "العضو غير موجود"
+
+msgid "Workout body part not found"
+msgstr "العضو غير موجود"
+
+msgid "Plan schedule not found"
+msgstr "الجدول الزمني للخطه غير موجود"
+
+msgid "You can not add workout to the rest day"
+msgstr "لايمكن اضافة تمرين في يوم راحة"
+
+msgid "The plan is only {0} days"
+msgstr "الخطة الرياضية {0} يوم فقط"
+
+msgid "Can not be deleted, because it's linked with workouts"
+msgstr "لايمكن حذفه لارتباطه مع تمارين رياضية"
+
+msgid "Can not be deleted, because it's linked with equipmnts"
+msgstr "لايمكن حذفه لارتباطه مع معدات رياضية"
+
+msgid "Can not be deleted, because it's linked with plans"
+msgstr "لايمكن حذفه لارتباطه مع خطط رياضية"
+
+msgid "Can not be deleted, because the exercise is linked with workouts"
+msgstr "لايمكن حذفه لارتباطه مع تمارين رياضية"
+
+msgid "Can not be deleted, because the trainer has plans"
+msgstr "لايمكن حذفه لان لديه خطط رياضية"
+
+msgid "Can not be deleted, because the workout is in plans"
+msgstr "لايمكن حذفه لان التمرين مرتبط مع خطط رياضية"
+
+msgid "Can not be deleted, because the workout has exercises"
+msgstr "لايمكن حذفه لانه يحتوي على تمارين"
+
+msgid "Can not be deleted, because the plan has schedules"
+msgstr "لايمكن حذفه لارتباطه مع جداول زمنية"
+
+msgid "Can not be deleted, because the trainer has exercises"
+msgstr "لايمكن حذفه لارتباطه مع تمارين"
+
+msgid "Can not be deleted, because it's linked with exercises"
+msgstr "لايمكن حذفه لارتباطه مع تمارين"
+
+msgid "Can not be deleted, because the trainer has workouts"
+msgstr "لايمكن حذفه لارتباطه مع تمارين"
+
+msgid "Body part is already attached with this exercise"
+msgstr "العضو مرتبط مسبقا مع التمرين"
+
+msgid "Duration must have a value and bigger than 0"
+msgstr "يجب ان يكون الوقت اكبر من 0"
+
+msgid "Reps must have a value and bigger than 0"
+msgstr "يجب ان تكون التكرارات اكبر من 0"
+
+msgid "Weight and reps must have a value and bigger than 0"
+msgstr "يجب ان تكون التكرارات و الوزن اكبر من 0"
+
+msgid "Body part is already attached with this workout"
+msgstr "العضو مرتبط مسبقا مع التمرين"
+
+msgid "Days per week must be greater than 0"
+msgstr "عدد الايام بالاسبوع يجب ان تكون اكبر من 0"
+
+msgid "Equipment is already attached with this workout"
+msgstr "الآلة الرياضية مرتبطا مسبقا مع التمرين"
+
+msgid "Workout equipment not found"
+msgstr "الآلة الرياضية غير موجودة"
+
+msgid "Duration must be greater than 0"
+msgstr "يجب ان يكون الوقت اكبر من 0"
