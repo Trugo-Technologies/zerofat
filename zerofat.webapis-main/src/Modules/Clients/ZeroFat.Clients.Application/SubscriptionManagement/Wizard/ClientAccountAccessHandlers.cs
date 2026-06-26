@@ -253,6 +253,7 @@ public class UpdateClientAccountAccessRequestHandler(
     IReadRepository<ClientSubscription> subscriptionRepo,
     IReadRepository<MealPlan> mealPlanRepo,
     IReadRepository<DailyMealSelection> dailyMealSelectionRepo,
+    IRepository<ClientAccountActivityLog> activityLogRepo,
     IStripeService stripeService,
     IStringLocalizer<UpdateClientAccountAccessRequestHandler> localizer) : ICommandHandler<UpdateClientAccountAccessRequest, Result<ClientAccountAccessDto>>
 {
@@ -282,6 +283,13 @@ public class UpdateClientAccountAccessRequestHandler(
         }
 
         await clientRepo.UpdateAsync(client, cancellationToken);
+
+        await ClientAccountActivityLogHelper.LogAsync(
+            activityLogRepo, currentUser, request.ClientId,
+            ClientAccountActivityAction.ProfileUpdated,
+            null,
+            request.FullName,
+            cancellationToken: cancellationToken);
 
         var updatedClient = await clientReadRepo.FirstOrDefaultAsync(
             new ClientByIdSpec<ClientDetailsDto>(request.ClientId),

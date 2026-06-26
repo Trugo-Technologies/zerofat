@@ -31,6 +31,7 @@ public class ClientPortalContext : IPDbContext
 
     public DbSet<DailySelection> DailySelections => Set<DailySelection>();
     public DbSet<DailyMealSelection> DailyMealSelections => Set<DailyMealSelection>();
+    public DbSet<ClientAccountActivityLog> ClientAccountActivityLogs => Set<ClientAccountActivityLog>();
 
 
     public DbSet<DiscountRule> DiscountRules => Set<DiscountRule>();

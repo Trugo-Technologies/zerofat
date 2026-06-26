@@ -85,3 +85,14 @@ public class DailyMealSelectionConfig : IEntityTypeConfiguration<DailyMealSelect
     }
 }
 
+public class ClientAccountActivityLogConfig : IEntityTypeConfiguration<ClientAccountActivityLog>
+{
+    public void Configure(EntityTypeBuilder<ClientAccountActivityLog> builder)
+    {
+        builder.ToTable("ClientAccountActivityLogs", SchemaNames.Client);
+        builder.HasIndex(x => x.ClientId);
+        builder.HasIndex(x => new { x.ClientId, x.CreatedOn });
+        builder.Property(x => x.RelatedDate).HasConversion(new DateOnlyConverter(), new DateOnlyComparer());
+    }
+}
+
