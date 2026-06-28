@@ -78,6 +78,9 @@ public class GetTokenWith2FARequestHandler : ICommandHandler<GetTokenWith2FARequ
         if (user == null)
             throw new NotFoundException("User Not Found");
 
+        if (user.UserType == ZeroFat.Domain.Enums.UserType.Client)
+            await _clientService.EnsureClientCanLoginAsync(user.PublicId);
+
         var device = await _deviceRepository.FirstOrDefaultAsync(new RequestByDeviceSpec(user.PublicId, request.Headers), cancellationToken);
         if (device == null)
             throw new BadRequestException("Device Not Found");

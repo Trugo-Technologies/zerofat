@@ -1,4 +1,5 @@
 ﻿using Ardalis.Specification;
+using ZeroFat.Application.Common.Exceptions;
 using ZeroFat.Application.Common.Persistence;
 using ZeroFat.Application.Common.Specification;
 using ZeroFat.Application.Shared;
@@ -47,7 +48,48 @@ public class ClientService : IClientService
         if (client == null)
             return true;
 
-        return client.IsActive && !client.AccountIsDeleted;
+        var utcNow = DateTime.UtcNow;
+        if (ClientAccessBlockHelper.IsExpiredTemporaryBlock(client.BlockOption, client.BlockedUntil, utcNow))
+        {
+            var entity = await _clientRepository.GetByIdAsync(clientId);
+            if (entity != null)
+            {
+                ClientAccessBlockHelper.ClearBlock(entity);
+                await _clientRepository.UpdateAsync(entity, withSaveChanges: true);
+            }
+
+            return entity?.IsActive == true && entity.AccountIsDeleted == false;
+        }
+
+        return client.IsActive
+            && !client.AccountIsDeleted
+            && !ClientAccessBlockHelper.IsBlocked(client.BlockOption, client.BlockedUntil, utcNow);
+    }
+
+    public async Task EnsureClientCanLoginAsync(DefaultIdType clientId)
+    {
+        var client = await _clientRepository.FirstOrDefaultAsync(new ClientStatusByIdSpec(clientId));
+        if (client == null)
+            return;
+
+        var utcNow = DateTime.UtcNow;
+        if (ClientAccessBlockHelper.IsExpiredTemporaryBlock(client.BlockOption, client.BlockedUntil, utcNow))
+        {
+            var entity = await _clientRepository.GetByIdAsync(clientId);
+            if (entity != null)
+            {
+                ClientAccessBlockHelper.ClearBlock(entity);
+                await _clientRepository.UpdateAsync(entity, withSaveChanges: true);
+            }
+
+            return;
+        }
+
+        if (!client.IsActive || client.AccountIsDeleted)
+            throw new ForbiddenException("Your account is currently inactive or has been deleted. Please contact support for assistance.");
+
+        if (ClientAccessBlockHelper.IsBlocked(client.BlockOption, client.BlockedUntil, utcNow))
+            throw new ForbiddenException("Your account has been blocked. Please contact support for assistance.");
     }
 
     public async Task DeactivateClientAsync(DefaultIdType clientId)

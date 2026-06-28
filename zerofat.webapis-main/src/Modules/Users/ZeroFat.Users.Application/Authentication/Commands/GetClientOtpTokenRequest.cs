@@ -6,6 +6,7 @@ using ZeroFat.Application.Common.Exceptions;
 using ZeroFat.Application.Common.Interfaces;
 using ZeroFat.Application.Common.Persistence;
 using ZeroFat.Application.Common.Validation;
+using ZeroFat.Application.Shared;
 using ZeroFat.Domain.Common;
 using ZeroFat.Domain.Enums;
 using ZeroFat.Shared.Authorization;
@@ -37,6 +38,7 @@ public class GetClientOtpTokenRequestHandler : ICommandHandler<GetClientOtpToken
     private readonly UserManager<ApplicationUser> _applicationUserManager;
     private readonly IRepository<Device> _deviceRepository;
     private readonly IStringLocalizer<GetClientOtpTokenRequestHandler> _localizer;
+    private readonly IClientService _clientService;
 
     private readonly IJobService _jobService;
 
@@ -44,12 +46,14 @@ public class GetClientOtpTokenRequestHandler : ICommandHandler<GetClientOtpToken
         UserManager<ApplicationUser> applicationUserManager,
         IStringLocalizer<GetClientOtpTokenRequestHandler> localizer,
         IJobService jobService,
+        IClientService clientService,
         IRepository<Device> deviceRepository)
     {
         _applicationUserManager = applicationUserManager;
         _deviceRepository = deviceRepository;
         _localizer = localizer;
         _jobService = jobService;
+        _clientService = clientService;
     }
 
     public async Task<Result<string>> Handle(GetClientOtpTokenRequest request, CancellationToken cancellationToken)
@@ -75,6 +79,10 @@ public class GetClientOtpTokenRequestHandler : ICommandHandler<GetClientOtpToken
                 throw new InternalServerException("Validation Errors Occurred.", result.GetErrors(_localizer));
 
             await _applicationUserManager.AddToRoleAsync(user, ZeroFatRoles.Client);
+        }
+        else
+        {
+            await _clientService.EnsureClientCanLoginAsync(user.PublicId);
         }
 
         string? token = await _applicationUserManager.GenerateTwoFactorTokenAsync(user, ZeroFatProviders.FourDigitPhoneProvider);

@@ -75,7 +75,11 @@ public class GetClientAccountAccessRequestHandler(
             TimeToReachGoalInDays = client.TimeToReachGoalInDays,
             NeededCaloriesToReachGoal = client.NeededCaloriesToReachGoal,
             Allergens = client.ClientAllergicIds.Select(_ => _.ToString()).ToList(),
-            DeliveryAddresses = await LoadDeliveryAddressesAsync(locationRepo, client.Id, cancellationToken)
+            DeliveryAddresses = await LoadDeliveryAddressesAsync(locationRepo, client.Id, cancellationToken),
+            AccessControl = BlockClientRequestHandler.BuildAccessControlDto(
+                client.BlockOption,
+                client.BlockedOn,
+                client.BlockedUntil)
         };
 
         if (client.ClientSubscriptionId.HasValue)

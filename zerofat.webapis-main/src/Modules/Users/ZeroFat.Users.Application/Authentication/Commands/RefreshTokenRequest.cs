@@ -11,6 +11,7 @@ using ZeroFat.Users.Application.Users;
 using ZeroFat.Application.Common.Specification;
 using Microsoft.Extensions.Localization;
 using ZeroFat.Application.Shared;
+using ZeroFat.Domain.Enums;
 
 namespace ZeroFat.Users.Application.Authentication.Commands;
 public class RefreshTokenRequest : ICommand<Result<TokenResponse>>
@@ -76,6 +77,9 @@ public class RefreshTokenRequestHandler : ICommandHandler<RefreshTokenRequest, R
 
         if (user == null)
             throw new NotFoundException(_localizer["User Not Found"]);
+
+        if (user.UserType == ZeroFat.Domain.Enums.UserType.Client)
+            await _clientService.EnsureClientCanLoginAsync(user.PublicId);
 
         var device = await _deviceRepository.FirstOrDefaultAsync(new ExpressionSpecification<Device>(p => p.UserPublicId == user.PublicId && p.BaseDeviceId == request.Headers.BaseDeviceId && p.Platform == request.Headers.Platform), cancellationToken);
         if (device is null)

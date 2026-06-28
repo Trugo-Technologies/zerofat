@@ -47,6 +47,19 @@ internal sealed class ClientAccountAccessController(IClientPortalModule clientPo
         return clientPortalModule.ExecuteCommandAsync(request);
     }
 
+    /// <summary>Block client app access (1 day, custom date, or permanent).</summary>
+    [HttpPost("{clientId:guid}/block")]
+    public Task<Result<ClientAccessControlDto>> BlockAsync(DefaultIdType clientId, BlockClientRequest request)
+    {
+        request.ClientId = clientId;
+        return clientPortalModule.ExecuteCommandAsync(request);
+    }
+
+    /// <summary>Restore client app access after a block.</summary>
+    [HttpPost("{clientId:guid}/unblock")]
+    public Task<Result<ClientAccessControlDto>> UnblockAsync(DefaultIdType clientId)
+        => clientPortalModule.ExecuteCommandAsync(new UnblockClientRequest(clientId));
+
     /// <summary>Subscription summary only — remaining days, delivered meal count, plan name.</summary>
     [HttpGet("{clientId:guid}/subscription-summary")]
     public Task<Result<ClientSubscriptionSummaryDto>> GetSubscriptionSummaryAsync(DefaultIdType clientId)

@@ -33,6 +33,10 @@ public class Client : ActivationEntity, IAggregateRoot
     public double NeededCaloriesToReachGoal { get; set; }
     public bool AccountIsDeleted { get; set; }
 
+    public ClientBlockOption BlockOption { get; set; }
+    public DateTime? BlockedOn { get; set; }
+    public DateTime? BlockedUntil { get; set; }
+
     public virtual ICollection<ClientLocation> Locations { get; set; } = new HashSet<ClientLocation>();
     public virtual ICollection<ClientGoal> Goals { get; set; } = new HashSet<ClientGoal>();
 }

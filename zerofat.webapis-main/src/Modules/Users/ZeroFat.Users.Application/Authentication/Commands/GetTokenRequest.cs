@@ -81,6 +81,9 @@ public class GetTokenRequestHandler : ICommandHandler<GetTokenRequest, Result<To
         if (!passwordValid)
             throw new UnauthorizedException("Identity Invalid Credentials");
 
+        if (user.UserType == ZeroFat.Domain.Enums.UserType.Client)
+            await _clientService.EnsureClientCanLoginAsync(user.PublicId);
+
         var roles = await _applicationUserManager.GetRolesAsync(user);
         var device = await _deviceRepository.FirstOrDefaultAsync(new RequestByDeviceSpec(user.PublicId, request.Headers), cancellationToken);
         bool isnew = false;

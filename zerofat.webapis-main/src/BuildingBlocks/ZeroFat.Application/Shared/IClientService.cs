@@ -15,6 +15,8 @@ public interface IClientService : ITransientService
     Task DeactivateClientAsync(DefaultIdType clientId);
 
     Task<bool> GetClientStatusByClientId(DefaultIdType clientId);
+
+    Task EnsureClientCanLoginAsync(DefaultIdType clientId);
 }
 
 public class ClientSharedDto : IDto

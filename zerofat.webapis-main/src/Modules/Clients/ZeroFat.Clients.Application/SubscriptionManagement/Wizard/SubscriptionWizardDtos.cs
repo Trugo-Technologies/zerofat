@@ -1,4 +1,5 @@
 using ZeroFat.Application.Common.Interfaces;
+using ZeroFat.ClientPortal.Domain.ClientManagement;
 using ZeroFat.ClientPortal.Domain.SubscriptionManagement;
 using ZeroFat.Domain.Enums;
 
@@ -96,6 +97,16 @@ public class ClientAccountAccessDto : IDto
     public List<string> Allergens { get; set; } = [];
     public List<ClientAccountAccessAddressDto> DeliveryAddresses { get; set; } = [];
     public ClientSubscriptionSummaryDto? Subscription { get; set; }
+    public ClientAccessControlDto AccessControl { get; set; } = new();
+}
+
+public class ClientAccessControlDto : IDto
+{
+    public string AccessStatus { get; set; } = "Active";
+    public ClientBlockOption BlockOption { get; set; }
+    public DateTime? BlockedOn { get; set; }
+    public DateTime? BlockedUntil { get; set; }
+    public DateTime? LastLogin { get; set; }
 }
 
 public class ClientAccountAccessAddressDto : IDto

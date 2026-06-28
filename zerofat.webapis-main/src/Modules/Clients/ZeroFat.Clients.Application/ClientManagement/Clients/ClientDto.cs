@@ -1,5 +1,6 @@
 ﻿using ZeroFat.Application.Common.Interfaces;
 using ZeroFat.Domain.Enums;
+using ZeroFat.ClientPortal.Domain.ClientManagement;
 
 namespace ZeroFat.ClientPortal.Application.ClientManagement.Clients;
 public class ClientStatusDto : IDto
@@ -7,6 +8,9 @@ public class ClientStatusDto : IDto
     public DefaultIdType Id { get; set; }
     public bool IsActive { get; set; }
     public bool AccountIsDeleted { get; set; }
+    public ClientBlockOption BlockOption { get; set; }
+    public DateTime? BlockedOn { get; set; }
+    public DateTime? BlockedUntil { get; set; }
 }
 
 public class ClientSimplifyDto : IDto
@@ -84,6 +88,10 @@ public class ClientDetailsDto : BaseEntityActivationDetailsDto
     public string? Email { get; set; }
     public DefaultIdType? ClientSubscriptionId { get; set; }
     public SubscriptionStatus SubscriptionStatus { get; set; }
+
+    public ClientBlockOption BlockOption { get; set; }
+    public DateTime? BlockedOn { get; set; }
+    public DateTime? BlockedUntil { get; set; }
 
     public List<DefaultIdType> ClientAllergicIds { get; set; } = new List<DefaultIdType>();
 }
