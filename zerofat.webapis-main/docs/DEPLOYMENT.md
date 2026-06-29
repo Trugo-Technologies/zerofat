@@ -2,6 +2,10 @@
 
 This repo is designed to be deployed as a single host application (`ZeroFat.WebAPIs`) that composes multiple modules.
 
+## Local publish and run (Windows exe)
+
+To publish and run `ZeroFat.WebAPIs.exe` on your machine (outside Docker/ECS), see [LOCAL_DEPLOYMENT.md](LOCAL_DEPLOYMENT.md).
+
 ## Primary deployment target: AWS (ECS + ECR + RDS PostgreSQL)
 
 The current deployment model is:
