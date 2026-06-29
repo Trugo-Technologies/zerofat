@@ -55,7 +55,7 @@ public class ClientService : IClientService
             if (entity != null)
             {
                 ClientAccessBlockHelper.ClearBlock(entity);
-                await _clientRepository.UpdateAsync(entity, withSaveChanges: true);
+                await _clientRepository.UpdateAsync(entity);
             }
 
             return entity?.IsActive == true && entity.AccountIsDeleted == false;
@@ -79,7 +79,7 @@ public class ClientService : IClientService
             if (entity != null)
             {
                 ClientAccessBlockHelper.ClearBlock(entity);
-                await _clientRepository.UpdateAsync(entity, withSaveChanges: true);
+                await _clientRepository.UpdateAsync(entity);
             }
 
             return;

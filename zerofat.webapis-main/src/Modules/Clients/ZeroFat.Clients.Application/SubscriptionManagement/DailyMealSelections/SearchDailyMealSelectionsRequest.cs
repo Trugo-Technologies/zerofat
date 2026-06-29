@@ -8,6 +8,7 @@ using ZeroFat.ClientPortal.Domain.ClientManagement;
 using ZeroFat.ClientPortal.Domain.SubscriptionManagement;
 using ZeroFat.Domain.Enums;
 using ZeroFat.NutriPlan.Domain.MealPlanning;
+using ZeroFat.ClientPortal.Application.SubscriptionManagement.MealRatings;
 
 namespace ZeroFat.ClientPortal.Application.SubscriptionManagement.DailyMealSelections;
 
@@ -40,10 +41,13 @@ public class SearchDailyMealSelectionsRequestHandler(
     IReadRepository<DailyMealSelection> repository,
     IReadRepository<Client> clientRepo,
     IReadRepository<CustomMeal> customMealRepo,
+    IReadRepository<MealRating> mealRatingRepo,
     ICurrentUser currentUser) : IQueryHandler<SearchDailyMealSelectionsRequest, PaginationResponse<DailyMealSelectionDto>>
 {
     private readonly IReadRepository<DailyMealSelection> _repository = repository;
     private readonly IReadRepository<Client> _clientRepo = clientRepo;
+    private readonly IReadRepository<CustomMeal> _customMealRepo = customMealRepo;
+    private readonly IReadRepository<MealRating> _mealRatingRepo = mealRatingRepo;
     private readonly ICurrentUser _currentUser = currentUser;
 
     public async Task<PaginationResponse<DailyMealSelectionDto>> Handle(SearchDailyMealSelectionsRequest request, CancellationToken cancellationToken)
@@ -61,6 +65,23 @@ public class SearchDailyMealSelectionsRequestHandler(
 
         var result = await _repository.PaginatedListAsync(new DailyMealSelectionsBySearchRequestSpec(request), request.PageNumber, request.PageSize, config, cancellationToken);
 
+        if (result.Data.Count > 0)
+        {
+            var mealSelectionIds = result.Data.Select(x => x.Id).ToList();
+            var ratings = await _mealRatingRepo.ListAsync(
+                new ExpressionSpecification<MealRating>(x => mealSelectionIds.Contains(x.DailyMealSelectionId)),
+                cancellationToken);
+            var ratingsByMealSelectionId = ratings.ToDictionary(x => x.DailyMealSelectionId);
+
+            foreach (var item in result.Data)
+            {
+                if (ratingsByMealSelectionId.TryGetValue(item.Id, out var rating))
+                {
+                    item.Rating = MealRatingHelper.ToSummaryDto(rating);
+                }
+            }
+        }
+
         if (isClient)
         {
             var client = await _clientRepo.FirstOrDefaultAsync(new ExpressionSpecification<Client>(x => x.Id == _currentUser.GetUserId()), cancellationToken);
@@ -73,7 +94,7 @@ public class SearchDailyMealSelectionsRequestHandler(
 
                 if (item.CustomMealId.HasValue)
                 {
-                    item.CustomMeal = await customMealRepo.FirstOrDefaultAsync(new ExpressionSpecificationProjecting<CustomMeal, CustomMealSimplifyDto>(x=> x.Id == item.CustomMealId.Value), cancellationToken);
+                    item.CustomMeal = await _customMealRepo.FirstOrDefaultAsync(new ExpressionSpecificationProjecting<CustomMeal, CustomMealSimplifyDto>(x=> x.Id == item.CustomMealId.Value), cancellationToken);
                 }
             }
         }

@@ -96,3 +96,18 @@ public class ClientAccountActivityLogConfig : IEntityTypeConfiguration<ClientAcc
     }
 }
 
+public class MealRatingConfig : IEntityTypeConfiguration<MealRating>
+{
+    public void Configure(EntityTypeBuilder<MealRating> builder)
+    {
+        builder.ToTable("MealRatings", SchemaNames.Client);
+        builder.HasIndex(x => x.ClientId);
+        builder.HasIndex(x => x.DailyMealSelectionId).IsUnique();
+        builder.HasIndex(x => x.CreatedOn);
+        builder.Property(x => x.MealDate).HasConversion(new DateOnlyConverter(), new DateOnlyComparer());
+        builder.Property(x => x.ImprovementTags)
+            .HasColumnType("jsonb")
+            .HasConversion(new JsonValueConverter<List<MealRatingImprovementTag>>());
+    }
+}
+

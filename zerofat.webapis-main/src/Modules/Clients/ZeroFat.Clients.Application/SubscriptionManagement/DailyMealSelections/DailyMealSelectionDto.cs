@@ -1,6 +1,7 @@
 ﻿using ZeroFat.Application.Common.Interfaces;
 using ZeroFat.ClientPortal.Application.ClientManagement.Clients;
 using ZeroFat.ClientPortal.Application.SubscriptionManagement.DailySelections;
+using ZeroFat.ClientPortal.Application.SubscriptionManagement.MealRatings;
 using ZeroFat.Domain.Common.Contracts;
 using ZeroFat.Domain.Enums;
 using ZeroFat.NutriPlan.Domain.MealPlanning;
@@ -58,6 +59,7 @@ public class DailyMealSelectionDto : DailyMealSelectionAuditableDto
     public MealSimplifyDto? Meal { get; set; }
     public CustomMealSimplifyDto? CustomMeal { get; set; }
     public ClientSimplifyDto? Client { get; set; }
+    public MealRatingSummaryDto? Rating { get; set; }
 }
 
 public class DailyMealSelectionDetailsDto : BaseEntityAuditableDetailsDto
