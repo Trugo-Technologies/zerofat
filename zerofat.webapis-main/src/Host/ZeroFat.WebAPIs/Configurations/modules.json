@@ -1,7 +1,10 @@
 {
   "DatabaseOptions": {
     "Provider": "postgresql",
-    "ConnectionString": "Host=localhost;Port=5432;Database=zerofatdb;Username=postgres;Password=your_password;"
+    "ConnectionString": "Host=localhost,5432;Database=zerofatdb;Username=postgres;Password=kavi2301;"
+    //"ConnectionString": "Host=zerofat-cluster.cluster-cpmqoikuyps2.ap-southeast-1.rds.amazonaws.com;Database=zerofatdb;Username=postgres;Password=2NoGCm20iWCl5Nhp9gYL;"
+    //"ConnectionString": "Host=zerofat-db-cluster.cluster-cpmqoikuyps2.ap-southeast-1.rds.amazonaws.com;Database=zerofatdb;Username=postgres;Password=2NoGCm20iWCl5Nhp9gYL;"
+    //"ConnectionString": "Server=sql8020.site4now.net;Database=db_aabdf9_final2025db;User=db_aabdf9_final2025db_admin;Password=P@ssw0rd;MultipleActiveResultSets=true;TrustServerCertificate=True;"
   },
   "Modules": {
     "Identity": {

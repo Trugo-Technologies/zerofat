@@ -1,7 +1,7 @@
 {
   "Storage": {
     "Provider": "Amazon",
-    "MasterEncryptionKey": "",
+    "MasterEncryptionKey": "+2ZC9wrwlvPswPxCND0BjrKJ3CfOpImGtn4hloVwo2I=",
     "Local": {
       "Path": "Files"
     },
@@ -10,8 +10,8 @@
       "Container": "test"
     },
     "Amazon": {
-      "AccessKeyID": "",
-      "SecretAccessKey": "",
+      "AccessKeyID": "AKIAQGHE5VCEBCSV5J67",
+      "SecretAccessKey": "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",
       "BucketName": "zerofat",
       "RegionEndpoint": "ap-southeast-1"
     }

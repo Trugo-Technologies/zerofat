@@ -12,7 +12,6 @@ internal static class Startup
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/hangfire.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/hangfire.{environmentName}.json", optional: true, reloadOnChange: true);
-        host.Configuration.AddJsonFile($"{configurationsDirectory}/hangfire.{environmentName}.local.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/healthcheck.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/healthcheck.{environmentName}.json", optional: true, reloadOnChange: true);
@@ -28,7 +27,6 @@ internal static class Startup
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/modules.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/modules.{environmentName}.json", optional: true, reloadOnChange: true);
-        host.Configuration.AddJsonFile($"{configurationsDirectory}/modules.{environmentName}.local.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/localization.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/localization.{environmentName}.json", optional: true, reloadOnChange: true);
@@ -38,16 +36,12 @@ internal static class Startup
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/stripe.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/stripe.{environmentName}.json", optional: true, reloadOnChange: true);
-        host.Configuration.AddJsonFile($"{configurationsDirectory}/stripe.{environmentName}.local.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/storage.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/storage.{environmentName}.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddJsonFile($"{configurationsDirectory}/sms.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/sms.{environmentName}.json", optional: true, reloadOnChange: true);
-
-        host.Configuration.AddJsonFile($"{configurationsDirectory}/email.json", optional: false, reloadOnChange: true);
-        host.Configuration.AddJsonFile($"{configurationsDirectory}/email.{environmentName}.json", optional: true, reloadOnChange: true);
 
         host.Configuration.AddEnvironmentVariables();
 

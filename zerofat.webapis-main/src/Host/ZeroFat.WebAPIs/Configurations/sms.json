@@ -3,17 +3,19 @@
     "Provider": "Etisalat",
     "Twilio": {
       "FromPhoneNumber": "",
-      "AccountSid": "",
-      "MessagingServiceSid": "",
-      "AuthToken": ""
+      "AccountSid": "AC9261e6c6cde96129cc46f31202f9be25",
+      "MessagingServiceSid": "MG58a88830fbed842b46fd871bd2229220",
+      "AuthToken": "04ce2671147d414f262ca3ecbe2f0016"
     },
     "Etisalat": {
       "LoginEndpoint": "https://smartmessaging.etisalat.ae:5676/login/user/",
       "SendSmsEndpoint": "https://smartmessaging.etisalat.ae:5676/campaigns/submissions/sms/nb",
-      "Username": "",
-      "Password": "",
+      "Username": "abdullah@zerofat",
+      "Password": "@Zerofat2030",
+
       "TransactionSenderId": "ZEROFAT APP",
       "TransactionCategoryId": "4.5",
+
       "PromotionalSenderId": "AD-ZEROFAT",
       "PromotionalCategoryId": "4.6"
     }

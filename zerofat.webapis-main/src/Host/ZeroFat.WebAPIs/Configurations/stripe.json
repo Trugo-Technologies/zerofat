@@ -1,8 +1,12 @@
 {
   "StripeSettings": {
-    "SecretKey": "",
+    // "SecretKey": "sk_test_51Qs1NT03mo9MTtGZYPUEyBNx7amTiy57XPuDkW8kXJAgUxjHZJtvJb2WS5gglnEwZOnP8rOBR1cLaMTAW5ZXru9d00W281EWN1",
+    // "SecretKey": "sk_test_51RJKr1P343YimjOx5Ts0fwC6eopRR9BJxjPxJzm9Etr5jhPfTgkMB5feCVtvYrImn9sftg0TwETmb5cVzPtFHai3005mhyFhWM",
+    "SecretKey": "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",
     "Currency": "AED",
     "SuccessUrlDomain": "https://api-app.zerofat.ai/api/clientPortal-module",
-    "CheckoutCompletedSecretKey": ""
+    "CheckoutCompletedSecretKey": "whsec_VtC34w9SlUifi34EkgqxpVtxn6yj7Ffw"
   }
 }
+
+

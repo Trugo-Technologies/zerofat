@@ -2,7 +2,7 @@
   "SecuritySettings": {
     "Provider": "Jwt",
     "JwtSettings": {
-      "key": "your_jwt_signing_key_min_32_chars",
+      "key": "SXYZAAN0MS3CR3T!1!MAG1C!1!XCYBCQ",
       "Issuer": "ZeroFAT",
       "Audience": "ZeroFAT",
       "TokenExpirationInMinutes": 1440,
