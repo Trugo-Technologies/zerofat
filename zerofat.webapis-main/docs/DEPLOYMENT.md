@@ -16,6 +16,14 @@ The current deployment model is:
 
 See: `docs/AWS_ECS_ECR.md`.
 
+## Multi-environment (DEV & QC)
+
+DEV and QC are deployed to separate ECS clusters with immutable image tags (`dev-<sha>`, `qc-<sha>`). GitLab CI pushes all tags (including `v1` for production) and provides manual **`deploy_dev`** / **`deploy_qc`** jobs.
+
+See: [MULTI_ENV_DEPLOYMENT.md](MULTI_ENV_DEPLOYMENT.md) for the full runbook and `scripts/deploy-ecs.sh` / `scripts/deploy-ecs.ps1`.
+
+Production (`zerofat-cluster`, tag `v1`) continues to use the existing manual force-deploy workflow and is not changed by the DEV/QC automation.
+
 ## Container (Docker)
 
 A `Dockerfile` is included at repo root.

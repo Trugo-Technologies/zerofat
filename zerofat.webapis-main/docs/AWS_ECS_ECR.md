@@ -1,6 +1,25 @@
 # AWS deployment (ECS + ECR + RDS PostgreSQL)
 
-This document describes the current/expected deployment model for **ZeroFat.WebAPIs** on AWS.
+This document describes the deployment model for **ZeroFat.WebAPIs** on AWS.
+
+## Multi-environment (DEV & QC)
+
+| Environment | Cluster | Service | Image tag |
+| ----------- | ------- | ------- | --------- |
+| DEV | `zerofat-dev-cluster` | `zerofat-dev-api-service` | `dev-<commit_sha>` |
+| QC | `zerofat-qc-cluster` | `zerofat-qc-api-service` | `qc-<commit_sha>` |
+
+**Runbook:** [MULTI_ENV_DEPLOYMENT.md](MULTI_ENV_DEPLOYMENT.md)  
+**Scripts:** `scripts/deploy-ecs.sh`, `scripts/deploy-ecs.ps1`, `scripts/build-push-ecr.sh`  
+**CI:** manual `deploy_dev` / `deploy_qc` jobs in `.gitlab-ci.yml`
+
+## Production (legacy reference)
+
+The sections below describe the original single-cluster production setup. Production still uses:
+
+- Cluster: `zerofat-cluster`
+- Service: `zerofat-api-service`
+- Image tag: `v1` (mutable; CI continues to push `v1` on every pipeline)
 
 ## Overview
 
@@ -55,15 +74,14 @@ Image naming variables in `.gitlab-ci.yml`:
 
 ### Image tagging strategy
 
-Current approach (as provided):
+CI pushes multiple tags from each build (prod-safe):
 
-- Use a **mutable** tag: `v1`
+- `v1` — production (existing manual deploy workflow)
+- `<commit_sha>` — immutable reference
+- `dev-<commit_sha>` — DEV ECS deploys
+- `qc-<commit_sha>` — QC ECS deploys
 
-Optional (recommended for traceability):
-
-To make rollbacks and traceability easier, prefer:
-
-- `IMAGE_TAG=$CI_COMMIT_SHORT_SHA` (or `$CI_COMMIT_SHA`)
+For DEV/QC deploy commands and rollback, see [MULTI_ENV_DEPLOYMENT.md](MULTI_ENV_DEPLOYMENT.md).
 
 ## ECS service configuration
 
@@ -182,16 +200,21 @@ At a high level:
 
 ### Manual deployment options
 
-Since deployment is manual after pushing to ECR, you typically do one of:
+For **DEV and QC**, use the scripted workflow:
 
-1. **Immutable image tags** (recommended):
-   - Register a new task definition revision with the new image tag
-   - Update `zerofat-api-service` to use the new revision
-2. **Mutable image tag** (current CI default appears to be `IMAGE_TAG=v1`):
-   - Push the updated image under the same tag
-   - In ECS, force a new deployment of `zerofat-api-service` so tasks pull the latest image for that tag
+```bash
+./scripts/deploy-ecs.sh dev <commit_sha> --verify
+./scripts/deploy-ecs.sh qc <commit_sha> --verify
+```
 
-#### Manual steps (AWS Console)
+Or trigger **`deploy_dev`** / **`deploy_qc`** in GitLab CI after `push_to_ecr`.
+
+For **production** (`zerofat-cluster`), the existing workflow still applies:
+
+1. CI pushes image tag `v1` to ECR
+2. In ECS service `zerofat-api-service`, choose **Force new deployment**
+
+#### Manual steps (AWS Console) — production only
 
 Option A (immutable tags):
 
@@ -204,24 +227,16 @@ Option B (mutable tag `v1`):
 1. Push image to ECR with tag `v1`
 2. In ECS service `zerofat-api-service`, choose **Force new deployment**
 
-### GitLab CI deployment stage (optional)
+### GitLab CI deployment stage
 
-If you want GitLab to also update ECS after pushing to ECR, add a `deploy` stage that:
+The pipeline includes a `deploy` stage with manual jobs:
 
-- Registers a new task definition revision (or updates the image)
-- Updates the ECS service to use the new revision
-- Forces a new deployment
+- `deploy_dev` — runs `scripts/deploy-ecs.sh dev $CI_COMMIT_SHORT_SHA --verify`
+- `deploy_qc` — runs `scripts/deploy-ecs.sh qc $CI_COMMIT_SHORT_SHA --verify`
 
-Exact commands depend on your ECS launch type (Fargate/EC2) and how task definitions are managed (JSON in repo vs generated).
+IAM permissions required for deploy jobs: `ecs:Describe*`, `ecs:RegisterTaskDefinition`, `ecs:UpdateService` on DEV/QC resources.
 
-For this environment (Fargate), a common pattern is:
-
-- `aws ecs describe-task-definition` (get the current JSON)
-- update the `containerDefinitions[].image` value
-- `aws ecs register-task-definition`
-- `aws ecs update-service --force-new-deployment`
-
-If you later decide to automate ECS updates from GitLab, a deploy job can be added, but it will require the task definition **container name** and a decision on immutable vs mutable tags.
+For Fargate task definition update patterns, see [MULTI_ENV_DEPLOYMENT.md](MULTI_ENV_DEPLOYMENT.md).
 
 ## Information needed to finalize a production-ready guide
 
