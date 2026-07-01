@@ -5,8 +5,6 @@ namespace ZeroFat.ClientPortal.Application.SubscriptionManagement.MealRatings;
 
 internal static class MealRatingHelper
 {
-    public static DateTime ToUtcDate(DateOnly date) =>
-        date.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
     public static string GetAppRatingLabel(MealRatingValue rating) => rating switch
     {
         MealRatingValue.NotGood => "Not good",
@@ -67,7 +65,7 @@ internal static class MealRatingHelper
         ImprovementTags = MapImprovementTags(entity.ImprovementTags),
         AdditionalComment = BuildAdditionalComment(entity.ImprovementTags),
         Feedback = entity.Comment,
-        MealDate = DateOnly.FromDateTime(entity.MealDate),
+        MealDate = entity.MealDate,
         SubmittedOn = entity.CreatedOn,
         AdminReply = entity.AdminReply,
         AdminRepliedOn = entity.AdminRepliedOn,
@@ -98,12 +96,12 @@ internal static class MealRatingHelper
 
         if (filters.DateFrom.HasValue)
         {
-            query.Where(x => x.MealDate >= ToUtcDate(filters.DateFrom.Value));
+            query.Where(x => x.MealDate >= filters.DateFrom.Value);
         }
 
         if (filters.DateTo.HasValue)
         {
-            query.Where(x => x.MealDate <= filters.DateTo.Value.ToDateTime(TimeOnly.MaxValue, DateTimeKind.Utc));
+            query.Where(x => x.MealDate <= filters.DateTo.Value);
         }
 
         if (!string.IsNullOrWhiteSpace(filters.Search))

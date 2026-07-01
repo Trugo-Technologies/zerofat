@@ -104,6 +104,7 @@ public class MealRatingConfig : IEntityTypeConfiguration<MealRating>
         builder.HasIndex(x => x.ClientId);
         builder.HasIndex(x => x.DailyMealSelectionId).IsUnique();
         builder.HasIndex(x => x.CreatedOn);
+        builder.Property(x => x.MealDate).HasConversion(new DateOnlyConverter(), new DateOnlyComparer());
         builder.Property(x => x.ImprovementTags)
             .HasColumnType("jsonb")
             .HasConversion(new JsonValueConverter<List<MealRatingImprovementTag>>());
