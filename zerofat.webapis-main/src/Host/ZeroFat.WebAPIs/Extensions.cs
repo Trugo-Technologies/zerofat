@@ -74,7 +74,7 @@ public static class Extensions
         }
 
 
-        // scheduler.ScheduleAllRecurringJobsAsync().Wait();
+        scheduler.ScheduleAllRecurringJobsAsync().Wait();
 
 
 

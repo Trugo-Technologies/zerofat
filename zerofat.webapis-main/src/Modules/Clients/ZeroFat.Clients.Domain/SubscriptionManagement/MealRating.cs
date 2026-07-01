@@ -33,7 +33,7 @@ public class MealRating : AuditableEntity, IAggregateRoot
 
     public DefaultIdType? MealId { get; set; }
     public string? MealName { get; set; }
-    public DateOnly MealDate { get; set; }
+    public DateTime MealDate { get; set; }
 
     public MealRatingValue Rating { get; set; }
     public List<MealRatingImprovementTag> ImprovementTags { get; set; } = [];
