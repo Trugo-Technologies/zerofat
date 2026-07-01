@@ -97,7 +97,7 @@ public class SubmitMealRatingRequestHandler(
             existing.Comment = string.IsNullOrWhiteSpace(request.Comment) ? null : request.Comment.Trim();
             existing.MealName = mealName;
             existing.MealId = mealSelection.MealId;
-            existing.MealDate = MealRatingHelper.ToUtcDate(mealSelection.Date);
+            existing.MealDate = mealSelection.Date;
 
             await mealRatingRepo.UpdateAsync(existing, cancellationToken);
             return await Result<MealRatingSummaryDto>.SuccessAsync(MealRatingHelper.ToSummaryDto(existing));
@@ -109,7 +109,7 @@ public class SubmitMealRatingRequestHandler(
             DailyMealSelectionId = request.DailyMealSelectionId,
             MealId = mealSelection.MealId,
             MealName = mealName,
-            MealDate = MealRatingHelper.ToUtcDate(mealSelection.Date),
+            MealDate = mealSelection.Date,
             Rating = request.Rating,
             ImprovementTags = tags,
             Comment = string.IsNullOrWhiteSpace(request.Comment) ? null : request.Comment.Trim()
