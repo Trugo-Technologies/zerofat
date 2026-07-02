@@ -26,6 +26,20 @@ public class ClientPortalSettingService : IClientPortalSettingservice
         return int.Parse(p.Value);
     }
 
+    public async Task<TimeOnly> GetCutoffTime()
+    {
+        var p = await _context.Settings
+                                .WithSpecification(new ClientPortalSettingByNameSpec(ClientPortalSettingConstants.CutoffTime))
+                                .FirstOrDefaultAsync();
+
+        if (p == null || string.IsNullOrWhiteSpace(p.Value))
+        {
+            return ClientPortalSetting.DefaultCutoffTime;
+        }
+
+        return TimeOnly.Parse(p.Value);
+    }
+
     public async Task<int> GetDefaultNutriPlanTimeAvailable()
     {
         var p = await _context.Settings
@@ -133,6 +147,17 @@ public class ClientPortalSettingService : IClientPortalSettingservice
         _ = p ?? throw new NotFoundException("offsetSubscriptionInDays is not found");
 
         p.Value = offsetSubscriptionInDays.ToString();
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task SetCutoffTime(TimeOnly cutoffTime)
+    {
+        var p = await _context.Settings
+                        .WithSpecification(new ClientPortalSettingByNameSpec(ClientPortalSettingConstants.CutoffTime))
+                        .FirstOrDefaultAsync();
+        _ = p ?? throw new NotFoundException("CutoffTime is not found");
+
+        p.Value = cutoffTime.ToString("HH:mm");
         await _context.SaveChangesAsync();
     }
 

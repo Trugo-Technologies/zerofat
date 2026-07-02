@@ -6,6 +6,12 @@
     "Value": "2"
   },
   {
+    "PropertyName": "CutoffTime",
+    "PropertyType": "String",
+    "ApplicationModule": "ClientPortal",
+    "Value": "13:00"
+  },
+  {
     "PropertyName": "NutriPlanBasedStartegy",
     "PropertyType": "String",
     "ApplicationModule": "ClientPortal",

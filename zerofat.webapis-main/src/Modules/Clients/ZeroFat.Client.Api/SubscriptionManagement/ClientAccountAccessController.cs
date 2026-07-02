@@ -18,7 +18,6 @@ namespace ZeroFat.ClientPortal.Api.SubscriptionManagement;
 ///   GET {clientId}/subscription-summary → active plan, dates, remainingDays, totalDeliveredMeals
 ///   GET {clientId}/delivery-calendar → monthly calendar + summary counts
 ///   GET {clientId}/delivery-calendar/{date} → day detail drawer
-///   GET/PUT {clientId}/delivery-calendar/cutoff-settings
 ///   PUT {clientId}/delivery-calendar/change-method
 ///   PUT {clientId}/delivery-calendar/cancel
 ///   PUT {clientId}/delivery-calendar/move
@@ -84,19 +83,6 @@ internal sealed class ClientAccountAccessController(IClientPortalModule clientPo
     [HttpGet("{clientId:guid}/delivery-calendar/{date}")]
     public Task<Result<ClientDeliveryDayDetailDto>> GetDeliveryDayDetailAsync(DefaultIdType clientId, DateOnly date)
         => clientPortalModule.ExecuteQueryAsync(new GetClientDeliveryDayDetailRequest(clientId, date));
-
-    [HttpGet("{clientId:guid}/delivery-calendar/cutoff-settings")]
-    public Task<Result<ClientDeliveryCutoffSettingsDto>> GetCutoffSettingsAsync(DefaultIdType clientId)
-        => clientPortalModule.ExecuteQueryAsync(new GetClientDeliveryCutoffSettingsRequest(clientId));
-
-    [HttpPut("{clientId:guid}/delivery-calendar/cutoff-settings")]
-    public Task<Result<ClientDeliveryCutoffSettingsDto>> UpdateCutoffSettingsAsync(
-        DefaultIdType clientId,
-        UpdateClientDeliveryCutoffSettingsRequest request)
-    {
-        request.ClientId = clientId;
-        return clientPortalModule.ExecuteCommandAsync(request);
-    }
 
     [HttpPut("{clientId:guid}/delivery-calendar/change-method")]
     public Task<Result<ClientDeliveryDayDetailDto>> ChangeDeliveryMethodAsync(

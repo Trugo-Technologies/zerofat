@@ -119,11 +119,12 @@ internal static class ClientDeliveryCalendarHelper
         CancellationToken cancellationToken)
     {
         var offsetDays = await settings.GetOffsetSubscriptionInDays();
+        var cutoffTime = await settings.GetCutoffTime();
         return new ClientDeliveryCutoffSettingsDto
         {
             EnableCutoffRestriction = offsetDays > 0,
-            CutoffValue = offsetDays * 24,
-            CutoffUnit = "Hours"
+            OffsetSubscriptionDays = offsetDays,
+            CutoffTimeUtc = cutoffTime
         };
     }
 
@@ -137,12 +138,11 @@ internal static class ClientDeliveryCalendarHelper
             return;
         }
 
-        var cutoffHours = cutoff.CutoffUnit.Equals("Hours", StringComparison.OrdinalIgnoreCase)
-            ? cutoff.CutoffValue
-            : cutoff.CutoffValue * 24;
+        var cutoffDateTime = targetDate
+            .AddDays(-cutoff.OffsetSubscriptionDays)
+            .ToDateTime(cutoff.CutoffTimeUtc, DateTimeKind.Utc);
 
-        var deliveryDateTime = targetDate.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
-        if (DateTime.UtcNow > deliveryDateTime.AddHours(-cutoffHours))
+        if (DateTime.UtcNow > cutoffDateTime)
         {
             throw new BadRequestException(localizer["Changes are not allowed after the cutoff time."]);
         }
@@ -398,86 +398,6 @@ public class GetClientDeliveryDayDetailRequestHandler(
             selectionRepo, mealSelectionRepo, mealTypeRepo, mealPlanRepo, paymentRepo, mealRepo, settings, null, cancellationToken);
 
         return await Result<ClientDeliveryDayDetailDto>.SuccessAsync(dto);
-    }
-}
-
-public class GetClientDeliveryCutoffSettingsRequest(DefaultIdType clientId) : IQuery<Result<ClientDeliveryCutoffSettingsDto>>
-{
-    public DefaultIdType ClientId { get; set; } = clientId;
-}
-
-public class GetClientDeliveryCutoffSettingsRequestHandler(
-    ICurrentUser currentUser,
-    IReadRepository<Client> clientRepo,
-    IClientPortalSettingservice settings,
-    IStringLocalizer<GetClientDeliveryCutoffSettingsRequestHandler> localizer)
-    : IQueryHandler<GetClientDeliveryCutoffSettingsRequest, Result<ClientDeliveryCutoffSettingsDto>>
-{
-    public async Task<Result<ClientDeliveryCutoffSettingsDto>> Handle(
-        GetClientDeliveryCutoffSettingsRequest request,
-        CancellationToken cancellationToken)
-    {
-        SubscriptionWizardAdminHelper.EnsureAdmin(currentUser, localizer);
-        _ = await clientRepo.GetByIdAsync(request.ClientId, cancellationToken)
-            ?? throw new NotFoundException(localizer["Client not found"]);
-
-        var dto = await ClientDeliveryCalendarHelper.BuildCutoffSettingsAsync(settings, cancellationToken);
-        return await Result<ClientDeliveryCutoffSettingsDto>.SuccessAsync(dto);
-    }
-}
-
-public class UpdateClientDeliveryCutoffSettingsRequest : ICommand<Result<ClientDeliveryCutoffSettingsDto>>
-{
-    public DefaultIdType ClientId { get; set; }
-    public bool EnableCutoffRestriction { get; set; }
-    public int CutoffValue { get; set; }
-    public string CutoffUnit { get; set; } = "Hours";
-}
-
-public class UpdateClientDeliveryCutoffSettingsRequestValidator : CustomValidator<UpdateClientDeliveryCutoffSettingsRequest>
-{
-    public UpdateClientDeliveryCutoffSettingsRequestValidator()
-    {
-        RuleFor(x => x.ClientId).NotEmpty();
-        RuleFor(x => x.CutoffValue).GreaterThan(0).When(x => x.EnableCutoffRestriction);
-    }
-}
-
-public class UpdateClientDeliveryCutoffSettingsRequestHandler(
-    ICurrentUser currentUser,
-    IReadRepository<Client> clientRepo,
-    IClientPortalSettingservice settings,
-    IRepository<ClientAccountActivityLog> activityLogRepo,
-    IStringLocalizer<UpdateClientDeliveryCutoffSettingsRequestHandler> localizer)
-    : ICommandHandler<UpdateClientDeliveryCutoffSettingsRequest, Result<ClientDeliveryCutoffSettingsDto>>
-{
-    public async Task<Result<ClientDeliveryCutoffSettingsDto>> Handle(
-        UpdateClientDeliveryCutoffSettingsRequest request,
-        CancellationToken cancellationToken)
-    {
-        SubscriptionWizardAdminHelper.EnsureAdmin(currentUser, localizer);
-        _ = await clientRepo.GetByIdAsync(request.ClientId, cancellationToken)
-            ?? throw new NotFoundException(localizer["Client not found"]);
-
-        var previous = await ClientDeliveryCalendarHelper.BuildCutoffSettingsAsync(settings, cancellationToken);
-
-        var offsetDays = request.EnableCutoffRestriction
-            ? Math.Max(1, request.CutoffUnit.Equals("Hours", StringComparison.OrdinalIgnoreCase)
-                ? (int)Math.Ceiling(request.CutoffValue / 24.0)
-                : request.CutoffValue)
-            : 0;
-
-        await settings.SetOffsetSubscriptionInDays(offsetDays);
-        var dto = await ClientDeliveryCalendarHelper.BuildCutoffSettingsAsync(settings, cancellationToken);
-
-        await ClientAccountActivityLogHelper.LogAsync(
-            activityLogRepo, currentUser, request.ClientId,
-            ClientAccountActivityAction.CutoffSettingsChanged,
-            previous.EnableCutoffRestriction ? $"{previous.CutoffValue} {previous.CutoffUnit}" : "Disabled",
-            dto.EnableCutoffRestriction ? $"{dto.CutoffValue} {dto.CutoffUnit}" : "Disabled",
-            cancellationToken: cancellationToken);
-
-        return await Result<ClientDeliveryCutoffSettingsDto>.SuccessAsync(dto);
     }
 }
 

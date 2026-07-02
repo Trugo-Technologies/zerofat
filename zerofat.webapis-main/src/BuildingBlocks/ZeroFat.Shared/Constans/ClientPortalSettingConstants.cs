@@ -5,6 +5,9 @@ public static class ClientPortalSettingConstants
     //int
     public const string OffsetSubscriptionInDays = nameof(OffsetSubscriptionInDays);
 
+    // TimeOnly in UTC (HH:mm)
+    public const string CutoffTime = nameof(CutoffTime);
+
     // Enum (BASED ON TIME, BASED ON CALORIES)
     public const string NutriPlanBasedStartegy = nameof(NutriPlanBasedStartegy);
 

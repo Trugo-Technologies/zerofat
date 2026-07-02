@@ -1,4 +1,5 @@
 using ZeroFat.Application.Common.Interfaces;
+using ZeroFat.ClientPortal.Application.Settings.ClientPortalSettings;
 using ZeroFat.ClientPortal.Domain.SubscriptionManagement;
 using ZeroFat.Domain.Enums;
 
@@ -78,8 +79,8 @@ public class ClientDeliveryDayMealDto : IDto
 public class ClientDeliveryCutoffSettingsDto : IDto
 {
     public bool EnableCutoffRestriction { get; set; }
-    public int CutoffValue { get; set; }
-    public string CutoffUnit { get; set; } = "Hours";
+    public int OffsetSubscriptionDays { get; set; }
+    public TimeOnly CutoffTimeUtc { get; set; } = ClientPortalSetting.DefaultCutoffTime;
 }
 
 public class ClientDeliveryPaymentResultDto : IDto

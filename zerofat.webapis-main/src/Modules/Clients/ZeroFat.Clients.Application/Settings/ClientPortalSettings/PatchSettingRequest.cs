@@ -9,6 +9,7 @@ namespace ZeroFat.ClientPortal.Application.Settings.ClientPortalSettings;
 public class PatchSettingRequest : ICommand<Result>
 {
     public int? OffsetSubscriptionInDays { get; set; }
+    public TimeOnly? CutoffTime { get; set; }
     public NutriPlanStartegy? NutriPlanStartegy { get; set; }
     public int? WeeklyCaloricDeficit { get; set; }
     public int? WeeklyCaloricSurplus { get; set; }
@@ -42,6 +43,11 @@ public class PatchSettingRequestHandler : ICommandHandler<PatchSettingRequest, R
         if (request.OffsetSubscriptionInDays != null)
         {
             await _settingService.SetOffsetSubscriptionInDays(request.OffsetSubscriptionInDays.Value);
+        }
+
+        if (request.CutoffTime != null)
+        {
+            await _settingService.SetCutoffTime(request.CutoffTime.Value);
         }
 
         if (request.DefaultNutriPlanTimeAvailable != null)

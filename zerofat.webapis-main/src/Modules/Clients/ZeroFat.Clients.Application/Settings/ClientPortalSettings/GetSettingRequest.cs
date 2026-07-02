@@ -19,6 +19,7 @@ public class GetSettingRequestHandler : IQueryHandler<GetSettingRequest, Result<
         var setting = new ClientPortalSetting
         {
             OffsetSubscriptionInDays = await _service.GetOffsetSubscriptionInDays(),
+            CutoffTime = await _service.GetCutoffTime(),
             NutriPlanStartegy = await _service.GetNutriPlanStartegy(),
             DefaultNutriPlanTimeAvailable = await _service.GetDefaultNutriPlanTimeAvailable(),
             WeeklyCaloricDeficit = await _service.GetWeeklyCaloricDeficit(),

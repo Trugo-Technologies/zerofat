@@ -7,6 +7,7 @@ public interface IClientPortalSettingservice : ITransientService
     // Get Methods 
     #region get settings
     Task<int> GetOffsetSubscriptionInDays();
+    Task<TimeOnly> GetCutoffTime();
     Task<NutriPlanStartegy> GetNutriPlanStartegy();
     Task<int> GetWeeklyCaloricDeficit();
     Task<int> GetWeeklyCaloricSurplus();
@@ -21,6 +22,7 @@ public interface IClientPortalSettingservice : ITransientService
     #region set setting
     // Set Methods 
     Task SetOffsetSubscriptionInDays(int offsetSubscriptionInDays);
+    Task SetCutoffTime(TimeOnly cutoffTime);
     Task SetNutriPlanStartegy(NutriPlanStartegy nutriPlanStartegy);
     Task SetWeeklyCaloricDeficit(int weeklyCaloricDeficit);
     Task SetWeeklyCaloricSurplus(int weeklyCaloricSurplus);
