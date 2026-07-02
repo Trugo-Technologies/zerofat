@@ -26,7 +26,7 @@ public class MealTypeCalorieRecordingScheduler : IRecurringBackgroundJobSchedule
         _logger = logger;
     }
 
-    public async void Schedule(IRecurringJobManager recurringJobManager)
+    public async Task ScheduleAsync(IRecurringJobManager recurringJobManager)
     {
         try
         {

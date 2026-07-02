@@ -164,12 +164,13 @@ public class NutritionCalculationJob : IRecurringBackgroundJobScheduler
         _calculator = calculator;
     }
 
-    public void Schedule(IRecurringJobManager recurringJobManager)
+    public Task ScheduleAsync(IRecurringJobManager recurringJobManager)
     {
         recurringJobManager.AddOrUpdate(
             "nutrition-calculation-daily",
             () => _calculator.CalculateAndUpdateNutritionalValuesAsync(),
             Cron.Daily(3)); // 3 AM UTC
+        return Task.CompletedTask;
     }
 }
 

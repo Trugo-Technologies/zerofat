@@ -16,19 +16,11 @@ public class ZerofatJobScheduler : IZerofatJobScheduler
         _recurringJobManager = recurringJobManager;
     }
 
-    public Task ScheduleAllRecurringJobsAsync()
+    public async Task ScheduleAllRecurringJobsAsync()
     {
         foreach (var job in _jobs)
         {
-            try
-            {
-                job.Schedule(_recurringJobManager);
-            }
-            catch(Exception e)
-            {
-
-            }
+            await job.ScheduleAsync(_recurringJobManager);
         }
-        return Task.CompletedTask;
     }
 }

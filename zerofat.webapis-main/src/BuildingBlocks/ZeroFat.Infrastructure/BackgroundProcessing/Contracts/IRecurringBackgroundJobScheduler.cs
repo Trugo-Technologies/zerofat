@@ -5,7 +5,7 @@ namespace ZeroFat.Infrastructure.BackgroundProcessing.Contracts;
 
 public interface IRecurringBackgroundJobScheduler : ITransientService
 {
-    void Schedule(IRecurringJobManager recurringJobManager);
+    Task ScheduleAsync(IRecurringJobManager recurringJobManager);
 }
 
 public interface IZerofatJobScheduler

@@ -13,7 +13,7 @@ public class DeliveryStatusJobScheduler(IDeliveryStatusAutoUpdateService deliver
     private static readonly TimeZoneInfo UaeTimeZone =
         TZConvert.GetTimeZoneInfo("Arabian Standard Time");
 
-    public void Schedule(IRecurringJobManager recurringJobManager)
+    public Task ScheduleAsync(IRecurringJobManager recurringJobManager)
     {
         recurringJobManager.AddOrUpdate(
             "delivery-status-auto-update",
@@ -23,5 +23,6 @@ public class DeliveryStatusJobScheduler(IDeliveryStatusAutoUpdateService deliver
             {
                 TimeZone = UaeTimeZone
             });
+        return Task.CompletedTask;
     }
 }

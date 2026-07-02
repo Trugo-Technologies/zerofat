@@ -14,11 +14,12 @@ public class MealAssignmentJobScheduler : IRecurringBackgroundJobScheduler
         _mealAssignmentService = mealAssignmentService;
     }
 
-    public void Schedule(IRecurringJobManager recurringJobManager)
+    public Task ScheduleAsync(IRecurringJobManager recurringJobManager)
     {
         recurringJobManager.AddOrUpdate(
             "default-meal-assignment-daily",
             () => _mealAssignmentService.AssignDefaultMealsToSubscriptionsAsync(),
             Cron.Daily(3)); // 3 AM UTC
+        return Task.CompletedTask;
     }
 }

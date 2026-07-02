@@ -14,9 +14,8 @@ public class SubscriptionJobsScheduler : IRecurringBackgroundJobScheduler
         _subscriptionMealOrchestrator = subscriptionMealOrchestrator;
     }
 
-    public void Schedule(IRecurringJobManager recurringJobManager)
+    public Task ScheduleAsync(IRecurringJobManager recurringJobManager)
     {
-        // Run daily at 2 AM UTC
         recurringJobManager.AddOrUpdate(
             "subscription-sync",
             () => _subscriptionMealOrchestrator.SyncSubscriptionStatusesAsync(),
@@ -25,5 +24,6 @@ public class SubscriptionJobsScheduler : IRecurringBackgroundJobScheduler
             {
                 TimeZone = TimeZoneInfo.Utc
             });
+        return Task.CompletedTask;
     }
 }
