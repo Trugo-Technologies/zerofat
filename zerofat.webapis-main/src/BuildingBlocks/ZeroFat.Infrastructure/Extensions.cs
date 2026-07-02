@@ -17,6 +17,7 @@ using ZeroFat.Infrastructure.SMS;
 using ZeroFat.Infrastructure.Storages;
 using ZeroFat.Infrastructure.Stripe;
 using ZeroFat.Infrastructure.Email;
+using ZeroFat.Infrastructure.Notifications;
 using ZeroFat.Application.Common.Interfaces;
 
 
@@ -53,8 +54,10 @@ public static class Extensions
         builder.Services.AddStorageManager(storage);
 
         builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection(EmailSettings.SectionName));
+        builder.Services.Configure<PushNotificationSettings>(builder.Configuration.GetSection(PushNotificationSettings.SectionName));
         builder.Services.AddTransient<IEmailNotificationService, SmtpEmailNotificationService>();
         builder.Services.AddTransient<ISendSubscriptionPaymentLinkEmailJob, SmtpEmailNotificationService>();
+        builder.Services.AddTransient<ISendSubscriptionExpiredNotificationJob, SubscriptionExpiredNotificationService>();
 
     }
 

@@ -1,4 +1,5 @@
-﻿using ZeroFat.Application.Common.Persistence;
+﻿using ZeroFat.Application.Common.Interfaces;
+using ZeroFat.Application.Common.Persistence;
 using ZeroFat.Domain.Common.Contracts;
 using ZeroFat.Infrastructure.Persistence;
 using ZeroFat.Users.Application;
@@ -28,6 +29,7 @@ public static class InfrastructureModule
         services.AddJwtTokenAuthorizationModule(configuration);
         services.AddPersistenceModule(configuration);
         services.AddIdentity();
+        services.AddTransient<IPushNotificationService, Notifications.FcmPushNotificationService>();
 
         return services;
     }

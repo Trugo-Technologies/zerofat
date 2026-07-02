@@ -9,6 +9,13 @@ public interface IEmailNotificationService : ITransientService
         string paymentLink,
         string? optionalMessage,
         CancellationToken cancellationToken = default);
+
+    Task SendSubscriptionExpiredAsync(
+        string toEmail,
+        string clientName,
+        string subscriptionType,
+        DateOnly endDate,
+        CancellationToken cancellationToken = default);
 }
 
 /// <summary>Hangfire job enqueued on wizard finalize — sends payment link to customer email.</summary>
@@ -19,5 +26,17 @@ public interface ISendSubscriptionPaymentLinkEmailJob : ITransientService
         string clientName,
         string paymentLink,
         string? optionalMessage,
+        CancellationToken cancellationToken = default);
+}
+
+/// <summary>Hangfire job enqueued when a client's subscription expires — email + push.</summary>
+public interface ISendSubscriptionExpiredNotificationJob : ITransientService
+{
+    Task SendAsync(
+        Guid clientId,
+        string toEmail,
+        string clientName,
+        string subscriptionType,
+        DateOnly endDate,
         CancellationToken cancellationToken = default);
 }

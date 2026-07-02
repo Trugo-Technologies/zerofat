@@ -43,6 +43,12 @@ internal static class Startup
         host.Configuration.AddJsonFile($"{configurationsDirectory}/sms.json", optional: false, reloadOnChange: true);
         host.Configuration.AddJsonFile($"{configurationsDirectory}/sms.{environmentName}.json", optional: true, reloadOnChange: true);
 
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/email.json", optional: true, reloadOnChange: true);
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/email.{environmentName}.json", optional: true, reloadOnChange: true);
+
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/pushnotification.json", optional: true, reloadOnChange: true);
+        host.Configuration.AddJsonFile($"{configurationsDirectory}/pushnotification.{environmentName}.json", optional: true, reloadOnChange: true);
+
         host.Configuration.AddEnvironmentVariables();
 
 

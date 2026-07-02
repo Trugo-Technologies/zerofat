@@ -467,6 +467,8 @@ public class SubscriptionMealOrchestrator : ISubscriptionMealOrchestrator
 
         _logger.LogInformation("Found {Count} subscriptions to expire.", subscriptionsToExpire.Count);
 
+        var expiredClientNotifications = new List<(Guid ClientId, string Email, string ClientName, string SubscriptionType, DateOnly EndDate)>();
+
         foreach (var subscription in subscriptionsToExpire)
         {
             subscription.SubscriptionStatus = SubscriptionStatus.Expired;
@@ -477,9 +479,28 @@ public class SubscriptionMealOrchestrator : ISubscriptionMealOrchestrator
             {
                 subscription.Client.SubscriptionStatus = SubscriptionStatus.Expired;
                 subscription.Client.ClientSubscriptionId = null;
+
+                expiredClientNotifications.Add((
+                    subscription.ClientId,
+                    subscription.Client.Email ?? string.Empty,
+                    subscription.Client.FullName ?? subscription.Client.Email ?? "Client",
+                    subscription.SubscriptionType.ToString(),
+                    subscription.EndDate));
             }
         }
         await _dbContext.SaveChangesAsync();
+
+        foreach (var notification in expiredClientNotifications)
+        {
+            _jobService.Enqueue<ISendSubscriptionExpiredNotificationJob>(job =>
+                job.SendAsync(
+                    notification.ClientId,
+                    notification.Email,
+                    notification.ClientName,
+                    notification.SubscriptionType,
+                    notification.EndDate,
+                    CancellationToken.None));
+        }
     }
 
     /// <summary>

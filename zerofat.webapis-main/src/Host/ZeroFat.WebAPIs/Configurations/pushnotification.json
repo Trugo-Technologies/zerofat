@@ -1,0 +1,6 @@
+{
+  "PushNotificationSettings": {
+    "Enabled": false,
+    "FcmServerKey": ""
+  }
+}

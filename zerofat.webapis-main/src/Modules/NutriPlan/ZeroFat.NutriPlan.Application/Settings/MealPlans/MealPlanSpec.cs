@@ -14,6 +14,18 @@ public class MealPlansBySearchRequestSpec : EntitiesByPaginationFilterSpec<MealP
     }
 }
 
+public class MealPlansByFilterSpec : Specification<MealPlan, MealPlanDto>
+{
+    public MealPlansByFilterSpec(bool? isActive)
+    {
+        Query
+            .Include(x => x.MealPlanMealTypes)
+            .ThenInclude(x => x.MealType)
+            .Where(x => x.IsActive == isActive!.Value, isActive.HasValue)
+            .OrderByDescending(x => x.CreatedOn);
+    }
+}
+
 public class MealPlanByIdSpec<T> : Specification<MealPlan, T>
 {
     public MealPlanByIdSpec(DefaultIdType id) => Query.Where(p => p.Id == id);

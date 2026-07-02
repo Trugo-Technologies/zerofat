@@ -15,6 +15,11 @@ internal sealed class MealPlansController : BaseController
 
     public MealPlansController(INutriPlanModule nutriPlanModule) => _nutriPlanModule = nutriPlanModule;
 
+    /// <summary>GET list — optional filter: ?isActive=true|false</summary>
+    [HttpGet]
+    public Task<Result<List<MealPlanDto>>> GetListAsync([FromQuery] bool? isActive)
+        => _nutriPlanModule.ExecuteQueryAsync(new GetMealPlansRequest { IsActive = isActive });
+
     [HttpPost("search")]
     public async Task<PaginationResponse<MealPlanDto>> SearchAsync(SearchMealPlansRequest request)
         => await _nutriPlanModule.ExecuteQueryAsync(request);

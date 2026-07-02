@@ -1,12 +1,12 @@
 {
   "EmailSettings": {
-    "Enabled": false,
-    "FromAddress": "noreply@zerofat.ai",
+    "Enabled": true,
+    "FromAddress": "kavithasri.v@trugotech.com",
     "FromName": "ZeroFat",
-    "SmtpHost": "",
+    "SmtpHost": "smtp.hostinger.com",
     "SmtpPort": 587,
-    "SmtpUsername": "",
-    "SmtpPassword": "",
+    "SmtpUsername": "kavithasri.v@trugotech.com",
+    "SmtpPassword": "Kavithasri@8489",
     "UseSsl": true
   }
 }
